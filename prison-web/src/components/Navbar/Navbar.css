@@ -1,5 +1,11 @@
-body {
-  margin: 0;
-  padding: 0;
-  background: #191919;
+.login {
+  margin-right: 10px;
+}
+.auth-section {
+  position: fixed;
+  left: 85%;
+}
+.auth-section-logout {
+  position: fixed;
+  left: 90%;
 }
