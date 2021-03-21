@@ -1,38 +1,69 @@
-import { BrowserRouter as Router, Route, NavLink } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Route,
+  NavLink,
+  Switch,
+} from "react-router-dom";
 import "./App.css";
-import Login from "./components/Login";
-import Prison from "./components/Prison";
-import Register from "./components/Register";
+import Login from "./components/Login/Login";
+import Prison from "./components/Prison/Prison";
+import Logout from "./components/Logout/Logout";
+import Register from "./components/Register/Register";
+import Navbar from "./components/Navbar/Navbar";
 import React, { Component } from "react";
 
 class App extends Component {
   state = {
     user: "",
-    rememberMe: false,
+    sesionStatus: false,
+    roles: "",
+  };
+  setUser = (user, roles) => {
+    console.log(localStorage.getItem("user"));
+
+    this.setState({
+      user,
+      roles,
+    });
+  };
+  clearUser = () => {
+    this.setState({
+      user: "",
+    });
   };
   componentDidMount = () => {
-    const rememberMe = localStorage.getItem("userStatus");
-    console.log(rememberMe);
-    const user = rememberMe ? localStorage.getItem("user") : "";
-    this.setState({ user, rememberMe });
+    const user = localStorage.getItem("user");
+    if (localStorage.getItem("user")) {
+      const user = localStorage.getItem("user");
+      const sesionStatus = true;
+      console.log(user, sesionStatus);
+      this.setState({
+        user,
+        sesionStatus: true,
+        roles: localStorage.getItem("roles"),
+      });
+    }
   };
 
   render() {
     return (
       <div className="Main">
         <Router>
-          {this.state.rememberMe ? (
-            <div>Zalogowany jako {this.state.user}</div>
-          ) : (
-            <div>Bla</div>
-          )}
-
-          <NavLink to="/">Start</NavLink>
-          <NavLink to="/login">Logowanie</NavLink>
-          <NavLink to="/register">Rejestracja</NavLink>
-          <Route path="/" exact component={Prison} />
-          <Route path="/login" component={Login} />
-          <Route path="/register" component={Register} />
+          <Navbar user={this.state.user} />
+          <Switch>
+            <Route path="/register" component={Register} />
+            <Route path="/" exact component={Prison} />
+            <Route
+              path="/login"
+              component={() => (
+                <Login setUser={this.setUser} user={this.state.user} />
+              )}
+            />
+            <Route
+              path="/logout"
+              component={() => <Logout clearUser={this.clearUser} />}
+            />
+          </Switch>
         </Router>
       </div>
     );

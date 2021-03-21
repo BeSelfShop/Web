@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import "./Register.css";
 
 const API = "https://localhost:44333/api/Authentication/register";
 
@@ -45,7 +46,8 @@ class Register extends Component {
 
   render() {
     return (
-      <div>
+      <div className="registerBox">
+        <h1 className="registerH1">Rejestracja użytkownika</h1>
         <input
           type="text"
           name="userName"
@@ -78,7 +80,7 @@ class Register extends Component {
           onChange={this.handleChange}
         />
         <input
-          type="mail"
+          type="email"
           placeholder="mail"
           name="email"
           className="mail"
@@ -93,7 +95,9 @@ class Register extends Component {
           value={this.state.inviteCode}
           onChange={this.handleChange}
         />
-        <button onClick={this.handleButton}>Zarejestruj</button>
+        <button className="registerButton" onClick={this.handleButton}>
+          Zarejestruj
+        </button>
       </div>
     );
   }
