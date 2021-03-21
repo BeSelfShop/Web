@@ -1,14 +1,8 @@
 import React from "react";
-import {
-  BrowserRouter as Router,
-  Route,
-  NavLink,
-  Link,
-} from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
 import "./Navbar.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 const Navbar = (props) => {
- // console.log(this.props.user());
   return (
     <nav className="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
       <div className="container-fluid">
@@ -32,6 +26,20 @@ const Navbar = (props) => {
               </div>
             </li>
           </ul>
+          {props.user ? (
+            <Link to="/logout">
+              <button class="btn btn-outline-danger">Wyloguj</button>
+            </Link>
+          ) : (
+            <div>
+              <Link to="/login">
+                <button class="btn btn-outline-primary">Logowanie</button>
+              </Link>
+              <Link to="/register">
+                <button class="btn btn-outline-primary">Rejestracja</button>
+              </Link>
+            </div>
+          )}
         </div>
       </div>
     </nav>

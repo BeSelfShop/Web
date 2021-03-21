@@ -6,6 +6,7 @@
   border-top: 10px solid #991405;
   position: relative;
   animation: a1 2s linear infinite;
+  background: #191919;
 }
 
 .build::before,

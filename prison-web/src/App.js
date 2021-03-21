@@ -1,9 +1,4 @@
-import {
-  BrowserRouter as Router,
-  Route,
-  NavLink,
-  Switch,
-} from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import "./App.css";
 import Login from "./components/Login/Login";
 import Prison from "./components/Prison/Prison";
@@ -14,7 +9,7 @@ import React, { Component } from "react";
 
 class App extends Component {
   state = {
-    user: "",
+    user: null,
     sesionStatus: false,
     roles: "",
   };
@@ -28,11 +23,10 @@ class App extends Component {
   };
   clearUser = () => {
     this.setState({
-      user: "",
+      user: null,
     });
   };
   componentDidMount = () => {
-    const user = localStorage.getItem("user");
     if (localStorage.getItem("user")) {
       const user = localStorage.getItem("user");
       const sesionStatus = true;
