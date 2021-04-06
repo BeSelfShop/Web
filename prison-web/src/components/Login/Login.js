@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import "./Login.css";
 import { Redirect } from "react-router";
 
-const API = "https://wiezienie2021.azurewebsites.net/api/Authentication/login";
+const API = "https://localhost:44333/api/Authentication/login";
 
 class Login extends Component {
   state = {
@@ -31,8 +31,8 @@ class Login extends Component {
         console.log("Success:", data);
         if (data.status !== 400) {
           const user = JSON.stringify(data);
-          localStorage.setItem("user", user);
           localStorage.setItem("roles", data.userRoles);
+          localStorage.setItem("token", data.token);
           this.props.setUser(user, data.userRoles[0]);
         }
       })

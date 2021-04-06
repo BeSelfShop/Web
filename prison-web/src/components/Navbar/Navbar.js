@@ -22,23 +22,25 @@ const Navbar = (props) => {
             </li>
             <li className="nav-item">
               <div className="nav-link">
-                <NavLink to="/cels">Cele</NavLink>
+                <NavLink to="/cell">Cele</NavLink>
               </div>
             </li>
           </ul>
           {props.user ? (
             <div className="auth-section-logout">
               <Link to="/logout">
-                <button class="btn btn-outline-danger">Wyloguj</button>
+                <button className="btn btn-outline-danger">Wyloguj</button>
               </Link>
             </div>
           ) : (
             <div className="auth-section">
               <Link to="/login">
-                <button class="btn btn-outline-success login">Logowanie</button>
+                <button className="btn btn-outline-success login">
+                  Logowanie
+                </button>
               </Link>
               <Link to="/register">
-                <button class="btn btn-outline-warning">Rejestracja</button>
+                <button className="btn btn-outline-warning">Rejestracja</button>
               </Link>
             </div>
           )}

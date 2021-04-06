@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import "./Register.css";
 
-const API = "https://localhost:44333/api/Authentication/register";
+const API =
+  "https://wiezienie2021.azurewebsites.net/api/Authentication/register";
 
 class Register extends Component {
   state = {
@@ -36,8 +37,6 @@ class Register extends Component {
         if (data.status !== 400) {
           alert("Zarejestrowano");
         }
-        const test = this.state;
-        console.log(test);
       })
       .catch((error) => {
         console.error("Error:", error);

@@ -3,36 +3,37 @@ import "./App.css";
 import Login from "./components/Login/Login";
 import Prison from "./components/Prison/Prison";
 import Logout from "./components/Logout/Logout";
-import Register from "./components/Register/Register";
+import Cell from "./components/Cell/Cell";
+import RegisterUser from "./components/Register/RegisterUser/Register";
+import RegisterAdmin from "./components/Register/RegisterAdmin/RegisterAdmin";
 import Navbar from "./components/Navbar/Navbar";
+import AddPrisoner from "./components/Prisoner/AddPrisoner";
 import React, { Component } from "react";
 
 class App extends Component {
   state = {
-    user: null,
+    token: null,
     sesionStatus: false,
     roles: "",
   };
-  setUser = (user, roles) => {
-    console.log(localStorage.getItem("user"));
+  setUser = (token, roles) => {
+    console.log(localStorage.getItem("token"));
 
     this.setState({
-      user,
+      token,
       roles,
     });
   };
   clearUser = () => {
     this.setState({
-      user: null,
+      token: null,
     });
   };
   componentDidMount = () => {
-    if (localStorage.getItem("user")) {
-      const user = localStorage.getItem("user");
-      const sesionStatus = true;
-      console.log(user, sesionStatus);
+    if (localStorage.getItem("token")) {
+      const token = localStorage.getItem("token");
       this.setState({
-        user,
+        token,
         sesionStatus: true,
         roles: localStorage.getItem("roles"),
       });
@@ -40,17 +41,27 @@ class App extends Component {
   };
 
   render() {
+    console.log(this.state.token);
     return (
       <div className="Main">
         <Router>
-          <Navbar user={this.state.user} />
+          <Navbar user={this.state.token} />
           <Switch>
-            <Route path="/register" component={Register} />
+            <Route path="/register" exact component={RegisterUser} />
+            <Route path="/register/admin" component={RegisterAdmin} />
+            <Route
+              path="/cell"
+              component={() => <Cell userKey={this.state.token} />}
+            />
+            <Route
+              path="/prisoner"
+              component={() => <AddPrisoner userKey={this.state.token} />}
+            />
             <Route path="/" exact component={Prison} />
             <Route
               path="/login"
               component={() => (
-                <Login setUser={this.setUser} user={this.state.user} />
+                <Login setUser={this.setUser} user={this.state.token} />
               )}
             />
             <Route
