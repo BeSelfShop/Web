@@ -1,15 +1,12 @@
 import React, { Component } from 'react';
-
-
-const API = "https://wiezienie2021.azurewebsites.net/";
+import config from "../../config.json"
 
 class CellList extends Component {
     state = {
         cells: [],
     }
     componentDidMount = () => {
-        console.log("Success:");
-        fetch(API + "api/PCells", {
+        fetch(config.SEVER_URL + "api/PCells", {
             method: "GET",
 
             headers: {
@@ -33,7 +30,7 @@ class CellList extends Component {
     }
     deleteCell = (id) => {
         console.log(id)
-        fetch(API + "api/PCells/" + id, {
+        fetch(config.SEVER_URL + "api/PCells/" + id, {
             method: 'DELETE',
             headers: {
                 Accept: "application/json",
@@ -44,14 +41,13 @@ class CellList extends Component {
             .then(res => {
                 res.json()
                 var cells = [...this.state.cells];
-                var idx = cells.findIndex(item => item.id === id);
-                cells.splice(idx, 1);
+                var deletedCells = cells.findIndex(item => item.id === id);
+                cells.splice(deletedCells, 1);
                 this.setState({ cells })
             })
             .then(res => console.log(res))
     }
     handleCells = () => {
-        console.log(this.state.cells)
         return (
             <div>
                 <table>
@@ -69,7 +65,7 @@ class CellList extends Component {
                                 <td>{cell.bedsCount}</td>
                                 <td>{cell.occupiedBeds}</td>
                                 <td>{cell.cellType.cellName}</td>
-                                <td><button onClick={() => { this.deleteCell(cell.id) }}>Usuń</button>
+                                <td><button onClick={() => { this.deleteCell(cell.id)}}>Usuń</button>
                                     <button>Edytuj</button></td>
                             </tr>
                         ))}

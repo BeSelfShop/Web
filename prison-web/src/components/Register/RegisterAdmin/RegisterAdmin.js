@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import "./RegisterAdmin.css";
-
 const API =
   "https://wiezienie2021.azurewebsites.net/api/Authentication/register";
 

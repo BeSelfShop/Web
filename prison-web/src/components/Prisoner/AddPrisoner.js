@@ -1,9 +1,7 @@
 import React, { Component } from "react";
 import "./LoadCellComponent"
-import LoadCellComponent from "./LoadCellComponent";
+import config from "../../config.json"
 
-
-const API = "https://wiezienie2021.azurewebsites.net/";
 class AddPrisoner extends Component {
   state = {
     name: "",
@@ -13,13 +11,12 @@ class AddPrisoner extends Component {
     pass: false,
     behavior: 0,
     isolated: false,
-    idCell: 1,
+    idCell: null,
     cells: [],
   };
 
   handleChange = (e) => {
     if (e.target.name === "behavior") {
-      <LoadCellComponent />
       this.setState({
         [e.target.name]: e.target.value * 1,
       });
@@ -31,8 +28,7 @@ class AddPrisoner extends Component {
   };
 
   componentDidMount = () => {
-    console.log("Success:");
-    fetch(API + "api/PCells", {
+    fetch(config.SEVER_URL + "api/PCells", {
       method: "GET",
 
       headers: {
@@ -59,7 +55,7 @@ class AddPrisoner extends Component {
   handleButton = () => {
     const data = this.state;
     console.log(JSON.stringify(data));
-    fetch(API + "api/Prisoner", {
+    fetch(config.SEVER_URL + "api/Prisoner", {
       method: "POST", // or 'PUT'
 
       headers: {
@@ -90,6 +86,7 @@ class AddPrisoner extends Component {
       <div>
         <h4>Cela:</h4>
         <select name="cellName" onChange={this.handleCells}>
+          <option value="" defaultValue disabled hidden>Wybierz cele</option>
           {this.state.cells.map((cell) => (
             <option key={cell.id} value={cell.id}>
               {cell.cellType.cellName} {cell.occupiedBeds}/{cell.bedsCount}
