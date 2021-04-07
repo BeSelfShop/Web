@@ -4,6 +4,8 @@ import Login from "./components/Login/Login";
 import Prison from "./components/Prison/Prison";
 import Logout from "./components/Logout/Logout";
 import Cell from "./components/Cell/Cell";
+import CellList from "./components/Cell/CellList";
+
 import RegisterUser from "./components/Register/RegisterUser/Register";
 import RegisterAdmin from "./components/Register/RegisterAdmin/RegisterAdmin";
 import Navbar from "./components/Navbar/Navbar";
@@ -52,6 +54,10 @@ class App extends Component {
             <Route
               path="/cell"
               component={() => <Cell userKey={this.state.token} />}
+            />
+            <Route
+              path="/cellList"
+              component={() => <CellList userKey={this.state.token} />}
             />
             <Route
               path="/prisoner"

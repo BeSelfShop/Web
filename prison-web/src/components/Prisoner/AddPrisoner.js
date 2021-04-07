@@ -1,5 +1,9 @@
 import React, { Component } from "react";
-const API = "https://localhost:44333/api/Prisoner";
+import "./LoadCellComponent"
+import LoadCellComponent from "./LoadCellComponent";
+
+
+const API = "https://wiezienie2021.azurewebsites.net/";
 class AddPrisoner extends Component {
   state = {
     name: "",
@@ -10,9 +14,12 @@ class AddPrisoner extends Component {
     behavior: 0,
     isolated: false,
     idCell: 1,
+    cells: [],
   };
+
   handleChange = (e) => {
     if (e.target.name === "behavior") {
+      <LoadCellComponent />
       this.setState({
         [e.target.name]: e.target.value * 1,
       });
@@ -22,10 +29,37 @@ class AddPrisoner extends Component {
       });
     }
   };
+
+  componentDidMount = () => {
+    console.log("Success:");
+    fetch(API + "api/PCells", {
+      method: "GET",
+
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + localStorage.getItem("token"),
+      },
+    })
+      .then((response) => response.json())
+      .then((data) => {
+
+        this.setState({
+          cells: data
+        })
+
+
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
+
+  }
+
   handleButton = () => {
     const data = this.state;
     console.log(JSON.stringify(data));
-    fetch(API, {
+    fetch(API + "api/Prisoner", {
       method: "POST", // or 'PUT'
 
       headers: {
@@ -46,7 +80,31 @@ class AddPrisoner extends Component {
         console.error("Error:", error);
       });
   };
+  handleCells = (e) => {
+    this.setState({
+      idCell: e.target.value * 1,
+    });
+  }
+  mapCells = () => {
+    return (
+      <div>
+        <h4>Cela:</h4>
+        <select name="cellName" onChange={this.handleCells}>
+          {this.state.cells.map((cell) => (
+            <option key={cell.id} value={cell.id}>
+              {cell.cellType.cellName} {cell.occupiedBeds}/{cell.bedsCount}
+            </option>
+
+          ))}
+        ;
+      </select>
+      </div>
+    );
+
+  }
   render() {
+
+
     return (
       <div className="loginBox">
         <h1 className="loginH1">Dodawanie nowego więźnia</h1>
@@ -78,6 +136,7 @@ class AddPrisoner extends Component {
           value={this.state.address}
           onChange={this.handleChange}
         />
+        <h3>Zachowanie:</h3>
         <select name="behavior" onChange={this.handleChange}>
           <option key="1" value="1">
             1
@@ -95,6 +154,7 @@ class AddPrisoner extends Component {
             5
           </option>
         </select>
+        {this.mapCells()}
         <button className="loginButton" onClick={this.handleButton}>
           Dodaj więźnia
         </button>

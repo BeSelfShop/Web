@@ -17,7 +17,7 @@ const Navbar = (props) => {
             </li>
             <li className="nav-item">
               <div className="nav-link">
-                <NavLink to="/prisoners">Więźniowie</NavLink>
+                <NavLink to="/prisoner">Więźniowie</NavLink>
               </div>
             </li>
             <li className="nav-item">
@@ -51,9 +51,3 @@ const Navbar = (props) => {
 };
 
 export default Navbar;
-/*<Link to="/register">
-<button class="btn btn-outline-primary">Rejestracja</button>
-</Link>
-<Link to="/login">
-<button class="btn btn-outline-primary">Logowanie</button>
-</Link>*/

@@ -3,13 +3,13 @@ const API = "https://wiezienie2021.azurewebsites.net/api/PCells";
 
 class Cell extends Component {
   state = {
-    beds: 1,
+    bedsCount: 1,
     idCellType: 1,
+    cellNumber: 1,
     cells: [],
   };
   handleButton = () => {
     const data = this.state;
-    console.log(JSON.stringify(data));
     fetch(API, {
       method: "POST", // or 'PUT'
 
@@ -46,6 +46,7 @@ class Cell extends Component {
         this.setState({
           cells: data,
         });
+        console.log("Cele ze state: " + data)
       })
       .catch((error) => {
         console.error("Error:", error);
@@ -68,26 +69,35 @@ class Cell extends Component {
       idCellType: e.target.value * 1,
     });
   };
-  handleBedChange = (e) => {
+  handleChange = (e) => {
     this.setState({
-      beds: e.target.value * 1,
+      [e.target.name]: e.target.value * 1,
     });
   };
   render() {
     return (
       <div className="registerBox">
         <h1 className="registerH1">Tworzenie cel</h1>
-        <label htmlFor="beds">Ilość łóżek (1-10):</label>
+        <label htmlFor="bedsCount">Ilość łóżek (1-10):</label>
         <input
-          id="beds"
+          id="bedsCount"
           type="number"
-          name="beds"
+          name="bedsCount"
           min="1"
           max="10"
-          value={this.state.beds}
-          onChange={this.handleBedChange}
+          value={this.state.bedsCount}
+          onChange={this.handleChange}
         />
-        <label htmlFor="cellType">Wybierz typ celi:</label>
+        <label htmlFor="cellNumber">Numer celi:</label>
+        <input
+          id="cellNumber"
+          type="text"
+          name="cellNumber"
+          value={this.state.cellNumber}
+          onChange={this.handleChange}
+        />
+
+        <h3>Wybierz typ celi:</h3>
         {this.displayCellsType()}
 
         <button className="registerButton" onClick={this.handleButton}>
