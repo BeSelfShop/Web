@@ -41,7 +41,13 @@ class CellList extends Component {
                 Authorization: "Bearer " + localStorage.getItem("token"),
             },
         })
-            .then(res => res.json()) // or res.json()
+            .then(res => {
+                res.json()
+                var cells = [...this.state.cells];
+                var idx = cells.findIndex(item => item.id === id);
+                cells.splice(idx, 1);
+                this.setState({ cells })
+            })
             .then(res => console.log(res))
     }
     handleCells = () => {
@@ -63,8 +69,8 @@ class CellList extends Component {
                                 <td>{cell.bedsCount}</td>
                                 <td>{cell.occupiedBeds}</td>
                                 <td>{cell.cellType.cellName}</td>
-                                <button>Edytuj</button>
-                                <button>Usuń</button>
+                                <td><button onClick={() => { this.deleteCell(cell.id) }}>Usuń</button>
+                                    <button>Edytuj</button></td>
                             </tr>
                         ))}
                     </tbody>
