@@ -28,7 +28,7 @@ class AddPrisoner extends Component {
   };
 
   componentDidMount = () => {
-    fetch(config.SEVER_URL + "api/PCells", {
+    fetch(config.SERVER_URL + "api/PCells", {
       method: "GET",
 
       headers: {
@@ -55,7 +55,7 @@ class AddPrisoner extends Component {
   handleButton = () => {
     const data = this.state;
     console.log(JSON.stringify(data));
-    fetch(config.SEVER_URL + "api/Prisoner", {
+    fetch(config.SERVER_URL + "api/Prisoner", {
       method: "POST", // or 'PUT'
 
       headers: {
@@ -84,7 +84,7 @@ class AddPrisoner extends Component {
   mapCells = () => {
     return (
       <div>
-        <h4>Cela:</h4>
+        <h3>Cela:</h3>
         <select name="cellName" onChange={this.handleCells}>
           <option value="" defaultValue disabled hidden>Wybierz cele</option>
           {this.state.cells.map((cell) => (

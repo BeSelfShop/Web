@@ -1,0 +1,66 @@
+.popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+  background-color: rgba(0,0,0, 0.5);
+}
+.popup_inner {
+  position: absolute;
+  left: 10%;
+  right: 10%;
+  top: 10%;
+  bottom: 10%;
+  margin: auto;
+  background: #191919;
+
+}
+h3, h1, label{
+    color:white;
+    font-family: "Permanent Marker", cursive;
+}
+.cellBox {
+  padding: 40px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+td, tr{
+    font-family: "Permanent Marker", cursive;
+    color:white;
+    padding-left: 10;
+    border: 3px solid #3b3a3a;
+    
+}
+.headerTable{
+    background-color: #3b3a3a;
+    
+}
+button {
+  border: 0;
+  background: none;
+  display: block;
+  margin: 5px auto;
+  text-align: center;
+  border: 2px solid #2ecc71;
+  padding: 10px 20px;
+  outline: none;
+  color: white;
+  border-radius: 24px;
+  transition: 0.25s;
+  cursor: pointer;
+}
+button:hover {
+  background: #2ecc70ad;
+}
+.deleteButton{
+      padding: 10px 27px;
+        border: 2px solid red;
+}
+.deleteButton:hover {
+  background: rgba(248, 3, 3, 0.411);
+}

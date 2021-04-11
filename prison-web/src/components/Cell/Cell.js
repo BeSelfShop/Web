@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import config from "../../config.json"
+import "./Cell.css"
 
 class Cell extends Component {
   state = {
@@ -10,7 +11,7 @@ class Cell extends Component {
   };
   handleButton = () => {
     const data = this.state;
-    fetch(config.SEVER_URL + "api/PCells", {
+    fetch(config.SERVER_URL + "api/PCells", {
       method: "POST", // or 'PUT'
 
       headers: {
@@ -32,7 +33,7 @@ class Cell extends Component {
       });
   };
   componentDidMount = () => {
-    fetch(config.SEVER_URL + "api/CellType", {
+    fetch(config.SERVER_URL + "api/CellType", {
       method: "GET", // or 'PUT'
 
       headers: {

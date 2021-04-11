@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import "./Login.css";
 import { Redirect } from "react-router";
+import config from "../../config.json"
 
-const API = "https://wiezienie2021.azurewebsites.net/api/Authentication/login";
 
 class Login extends Component {
   state = {
@@ -17,8 +17,7 @@ class Login extends Component {
   };
   handleButton = () => {
     const data = this.state;
-    console.log(data);
-    fetch(API, {
+    fetch(config.SERVER_URL + "/api/Authentication/login", {
       method: "POST", // or 'PUT'
       headers: {
         Accept: "application/json",

@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import "./Register.css";
+import config from "../../../config.json"
 
-const API =
-  "https://wiezienie2021.azurewebsites.net/api/Authentication/register";
+
 
 class Register extends Component {
   state = {
@@ -23,7 +23,7 @@ class Register extends Component {
   handleButton = () => {
     const data = this.state;
     console.log(data);
-    fetch(API, {
+    fetch(config.SERVER_URL, {
       method: "POST", // or 'PUT'
       headers: {
         Accept: "application/json",

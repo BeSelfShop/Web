@@ -1,12 +1,22 @@
 import React, { Component } from 'react';
 import config from "../../config.json"
-
+import "./CellEdit"
+import "./Cell.css"
+import CellEdit from './CellEdit';
 class CellList extends Component {
     state = {
         cells: [],
+        showPopup: false,
+        cellId: null
+    }
+    togglePopup = (id) => {
+        this.setState({
+            showPopup: !this.state.showPopup,
+            cellId: id
+        });
     }
     componentDidMount = () => {
-        fetch(config.SEVER_URL + "api/PCells", {
+        fetch(config.SERVER_URL + "api/PCells", {
             method: "GET",
 
             headers: {
@@ -30,7 +40,7 @@ class CellList extends Component {
     }
     deleteCell = (id) => {
         console.log(id)
-        fetch(config.SEVER_URL + "api/PCells/" + id, {
+        fetch(config.SERVER_URL + "api/PCells/" + id, {
             method: 'DELETE',
             headers: {
                 Accept: "application/json",
@@ -47,12 +57,13 @@ class CellList extends Component {
             })
             .then(res => console.log(res))
     }
+
     handleCells = () => {
         return (
             <div>
                 <table>
                     <tbody>
-                        <tr style={{ border: "3px solid #3498db" }}>
+                        <tr className="headerTable">
                             <td>Numer:</td>
                             <td>Ilość miejsc:</td>
                             <td>Ilość zajętych miejsc:</td>
@@ -60,13 +71,20 @@ class CellList extends Component {
                             <td>Akcja:</td>
                         </tr>
                         {this.state.cells.map((cell) => (
-                            <tr key={cell.id} style={{ border: "3px solid #3498db" }}>
+                            <tr key={cell.id}>
                                 <td>{cell.cellNumber}</td>
                                 <td>{cell.bedsCount}</td>
                                 <td>{cell.occupiedBeds}</td>
                                 <td>{cell.cellType.cellName}</td>
-                                <td><button onClick={() => { this.deleteCell(cell.id)}}>Usuń</button>
-                                    <button>Edytuj</button></td>
+                                <td><button className="deleteButton" id={cell.id} onClick={() => { this.deleteCell(cell.id) }}>Usuń</button>
+                                    <button onClick={() => { this.togglePopup(cell.id) }}>Edytuj</button>
+                                    {this.state.showPopup ?
+                                        <CellEdit
+                                            id={this.state.cellId}
+                                            closePopup={this.togglePopup}
+                                        />
+                                        : null
+                                    }</td>
                             </tr>
                         ))}
                     </tbody>
@@ -75,11 +93,11 @@ class CellList extends Component {
         )
     }
     render() {
-        return (<div>
-            <h1>Heheh</h1>
-            <h1>Heheh</h1>
+        return (<div className="cellBox">
+            <h1>Lista cel:</h1>
             {this.handleCells()}
         </div >);
     }
 }
+
 export default CellList;
