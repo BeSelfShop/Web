@@ -3,13 +3,14 @@ import "./App.css";
 import Login from "./components/Login/Login";
 import Prison from "./components/Prison/Prison";
 import Logout from "./components/Logout/Logout";
-import Cell from "./components/Cell/Cell";
+import AddCell from "./components/Cell/AddCell";
 import CellList from "./components/Cell/CellList";
 
 import RegisterUser from "./components/Register/RegisterUser/Register";
 import RegisterAdmin from "./components/Register/RegisterAdmin/RegisterAdmin";
 import Navbar from "./components/Navbar/Navbar";
 import AddPrisoner from "./components/Prisoner/AddPrisoner";
+import PrisonerList from "./components/Prisoner/PrisonerList";
 import React, { Component } from "react";
 
 class App extends Component {
@@ -19,8 +20,6 @@ class App extends Component {
     roles: "",
   };
   setUser = (token, roles) => {
-    console.log(localStorage.getItem("token"));
-
     this.setState({
       token,
       roles,
@@ -43,24 +42,28 @@ class App extends Component {
   };
 
   render() {
-    console.log(this.state.token);
     return (
       <div className="Main">
         <Router>
-          <Navbar user={this.state.token} />
+          <Navbar user={this.state.token} roles={this.state.roles} />
           <Switch>
             <Route path="/register" exact component={RegisterUser} />
             <Route path="/register/admin" component={RegisterAdmin} />
+
             <Route
-              path="/cell"
-              component={() => <Cell userKey={this.state.token} />}
+              path="/addCell"
+              component={() => <AddCell userKey={this.state.token} />}
             />
             <Route
-              path="/cellList"
+              path="/prisoners"
+              component={() => <PrisonerList userKey={this.state.token} />}
+            />
+            <Route
+              path="/cell"
               component={() => <CellList userKey={this.state.token} />}
             />
             <Route
-              path="/prisoner"
+              path="/addPrisoner"
               component={() => <AddPrisoner userKey={this.state.token} />}
             />
             <Route path="/" exact component={Prison} />

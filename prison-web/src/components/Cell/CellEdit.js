@@ -7,10 +7,8 @@ class CellEdit extends Component {
         bedsCount: 1,
         idCellType: 1,
         cellNumber: 1,
-        id: 1
     }
     componentDidMount = () => {
-        console.log(config.SERVER_URL + "api/PCells/" + this.props.id)
         fetch(config.SERVER_URL + "api/PCells/" + this.props.id, {
             method: "GET",
 
@@ -24,7 +22,6 @@ class CellEdit extends Component {
             .then((data) => {
 
                 this.setState({
-                    id: this.props.id,
                     bedsCount: data.bedsCount,
                     idCellType: data.idCellType,
                     cellNumber: data.cellNumber,
@@ -52,6 +49,7 @@ class CellEdit extends Component {
                 console.log("Success:", data);
                 if (data.statusCode === 200) {
                     alert("Edytowano cele");
+                    this.props.refreshList()
                     this.props.closePopup();
                 }
             })

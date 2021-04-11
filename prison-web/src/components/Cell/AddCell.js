@@ -1,13 +1,15 @@
 import React, { Component } from "react";
 import config from "../../config.json"
 import "./Cell.css"
+import GetAllCellTypes from "../../fetchData/CellTypes/GetAllCellTypes";
+
 
 class Cell extends Component {
   state = {
     bedsCount: 1,
     idCellType: 1,
     cellNumber: 1,
-    cells: [],
+    cellTypes: [],
   };
   handleButton = () => {
     const data = this.state;
@@ -23,40 +25,33 @@ class Cell extends Component {
     })
       .then((response) => response.json())
       .then((data) => {
-        console.log("Success:", data);
-        if (data.status === 200) {
+        if (data.statusCode === 200) {
           alert("Dodano cele");
+          this.setState({
+            bedsCount: 1,
+            idCellType: 1,
+            cellNumber: 1,
+          })
         }
       })
       .catch((error) => {
         console.error("Error:", error);
       });
   };
-  componentDidMount = () => {
-    fetch(config.SERVER_URL + "api/CellType", {
-      method: "GET", // or 'PUT'
-
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-        Authorization: "Bearer " + localStorage.getItem("token"),
-      },
+  setCellTypes = (cellTypes) => {
+    this.setState({
+      cellTypes
     })
-      .then((response) => response.json())
-      .then((data) => {
-        this.setState({
-          cells: data,
-        });
-        console.log("Cele ze state: " + data)
-      })
-      .catch((error) => {
-        console.error("Error:", error);
-      });
+  }
+
+  componentDidMount = () => {
+    GetAllCellTypes(this.setCellTypes)
   };
   displayCellsType = () => {
     return (
       <select name="cellName" onChange={this.handleCellsType}>
-        {this.state.cells.map((cell) => (
+
+        {this.state.cellTypes.map((cell) => (
           <option key={cell.id} value={cell.id}>
             {cell.cellName}
           </option>

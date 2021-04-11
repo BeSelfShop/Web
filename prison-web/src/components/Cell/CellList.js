@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import config from "../../config.json"
-import "./CellEdit"
 import "./Cell.css"
 import CellEdit from './CellEdit';
+import GetAllCells from "../../fetchData/Cells/GetAllCells";
+import { Link } from "react-router-dom";
+
 class CellList extends Component {
     state = {
         cells: [],
@@ -15,28 +17,13 @@ class CellList extends Component {
             cellId: id
         });
     }
-    componentDidMount = () => {
-        fetch(config.SERVER_URL + "api/PCells", {
-            method: "GET",
-
-            headers: {
-                Accept: "application/json",
-                "Content-Type": "application/json",
-                Authorization: "Bearer " + localStorage.getItem("token"),
-            },
+    setCells = (cells) => {
+        this.setState({
+            cells
         })
-            .then((response) => response.json())
-            .then((data) => {
-
-                this.setState({
-                    cells: data
-                })
-                console.log(this.state.cells)
-
-            })
-            .catch((error) => {
-                console.error("Error:", error);
-            });
+    }
+    componentDidMount = () => {
+        GetAllCells(this.setCells)
     }
     deleteCell = (id) => {
         console.log(id)
@@ -82,6 +69,7 @@ class CellList extends Component {
                                         <CellEdit
                                             id={this.state.cellId}
                                             closePopup={this.togglePopup}
+                                            refreshList={() => GetAllCells(this.setCells)}
                                         />
                                         : null
                                     }</td>
@@ -96,6 +84,11 @@ class CellList extends Component {
         return (<div className="cellBox">
             <h1>Lista cel:</h1>
             {this.handleCells()}
+            <div>
+                <Link to="/addCell">
+                    <button>Dodaj cele</button>
+                </Link>
+            </div>
         </div >);
     }
 }

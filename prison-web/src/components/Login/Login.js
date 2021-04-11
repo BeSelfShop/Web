@@ -17,7 +17,7 @@ class Login extends Component {
   };
   handleButton = () => {
     const data = this.state;
-    fetch(config.SERVER_URL + "/api/Authentication/login", {
+    fetch(config.SERVER_URL + "api/Authentication/login", {
       method: "POST", // or 'PUT'
       headers: {
         Accept: "application/json",
@@ -27,12 +27,13 @@ class Login extends Component {
     })
       .then((response) => response.json())
       .then((data) => {
-        console.log("Success:", data);
-        if (data.status !== 400) {
+        console.log(data);
+        if (data.token != null) {
           const user = JSON.stringify(data);
-          localStorage.setItem("roles", data.userRoles);
+
+          localStorage.setItem("roles", data.roles);
           localStorage.setItem("token", data.token);
-          this.props.setUser(user, data.userRoles);
+          this.props.setUser(user, data.roles);
         }
       })
       .catch((error) => {

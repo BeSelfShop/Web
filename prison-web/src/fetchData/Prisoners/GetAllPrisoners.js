@@ -1,9 +1,8 @@
-const LoadCellComponent = () => {
-    const API = "https://wiezienie2021.azurewebsites.net/api/PCells"
-    console.log("Success:");
-    let dataCell;
-    fetch(API, {
-        method: "GET",
+import config from "../../config.json"
+
+const GetAllCellTypes = (props) => {
+    return (fetch(config.SERVER_URL + "api/Prisoner", {
+        method: "GET", // or 'PUT'
 
         headers: {
             Accept: "application/json",
@@ -13,14 +12,11 @@ const LoadCellComponent = () => {
     })
         .then((response) => response.json())
         .then((data) => {
-
-            data = dataCell;
-
+            props(data)
         })
         .catch((error) => {
             console.error("Error:", error);
-        });
-    return (dataCell);
+        }));
 }
 
-export default LoadCellComponent;
+export default GetAllCellTypes;

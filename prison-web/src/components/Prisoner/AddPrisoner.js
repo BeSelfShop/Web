@@ -1,59 +1,51 @@
 import React, { Component } from "react";
-import "./LoadCellComponent"
 import config from "../../config.json"
+import GetAllCells from "../../fetchData/Cells/GetAllCells";
 
 class AddPrisoner extends Component {
   state = {
-    name: "",
-    forname: "",
-    pesel: "",
-    address: "",
-    pass: false,
-    behavior: 0,
-    isolated: false,
-    idCell: null,
+    prisoner: {
+      name: "",
+      forname: "",
+      pesel: "",
+      address: "",
+      pass: false,
+      behavior: 1,
+      isolated: false,
+      idCell: null,
+    },
     cells: [],
   };
 
   handleChange = (e) => {
     if (e.target.name === "behavior") {
       this.setState({
-        [e.target.name]: e.target.value * 1,
+        prisoner: {
+          ...this.state.prisoner,
+          [e.target.name]: e.target.value * 1,
+        }
       });
     } else {
       this.setState({
-        [e.target.name]: e.target.value,
+        prisoner: {
+          ...this.state.prisoner,
+          [e.target.name]: e.target.value,
+        }
       });
     }
   };
-
-  componentDidMount = () => {
-    fetch(config.SERVER_URL + "api/PCells", {
-      method: "GET",
-
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-        Authorization: "Bearer " + localStorage.getItem("token"),
-      },
+  setCells = (cells) => {
+    this.setState({
+      cells
     })
-      .then((response) => response.json())
-      .then((data) => {
-
-        this.setState({
-          cells: data
-        })
-
-
-      })
-      .catch((error) => {
-        console.error("Error:", error);
-      });
+  }
+  componentDidMount = () => {
+    GetAllCells(this.setCells)
 
   }
 
   handleButton = () => {
-    const data = this.state;
+    const data = this.state.prisoner;
     console.log(JSON.stringify(data));
     fetch(config.SERVER_URL + "api/Prisoner", {
       method: "POST", // or 'PUT'
@@ -77,24 +69,26 @@ class AddPrisoner extends Component {
       });
   };
   handleCells = (e) => {
-    this.setState({
-      idCell: e.target.value * 1,
+    this.setState(prevState => {
+      let prisoner = { ...prevState.prisoner };
+      prisoner.idCell = e.target.value * 1;
+      return { prisoner }
     });
+
   }
   mapCells = () => {
     return (
       <div>
         <h3>Cela:</h3>
         <select name="cellName" onChange={this.handleCells}>
-          <option value="" defaultValue disabled hidden>Wybierz cele</option>
+          <option value="" defaultValue hidden>Wybierz cele</option>
           {this.state.cells.map((cell) => (
             <option key={cell.id} value={cell.id}>
               {cell.cellType.cellName} {cell.occupiedBeds}/{cell.bedsCount}
             </option>
 
           ))}
-        ;
-      </select>
+        </select>
       </div>
     );
 
@@ -109,28 +103,28 @@ class AddPrisoner extends Component {
           type="text"
           name="name"
           placeholder="Imię"
-          value={this.state.name}
+          value={this.state.prisoner.name}
           onChange={this.handleChange}
         />
         <input
           type="text"
           placeholder="Nazwisko"
           name="forname"
-          value={this.state.forname}
+          value={this.state.prisoner.forname}
           onChange={this.handleChange}
         />
         <input
           type="text"
           name="pesel"
           placeholder="Pesel"
-          value={this.state.pesel}
+          value={this.state.prisoner.pesel}
           onChange={this.handleChange}
         />
         <input
           type="text"
           placeholder="Adres"
           name="address"
-          value={this.state.address}
+          value={this.state.prisoner.address}
           onChange={this.handleChange}
         />
         <h3>Zachowanie:</h3>

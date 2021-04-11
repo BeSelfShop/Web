@@ -17,12 +17,12 @@ const Navbar = (props) => {
             </li>
             <li className="nav-item">
               <div className="nav-link">
-                <NavLink to="/prisoner">Więźniowie</NavLink>
+                <NavLink to="/prisoners">Lista więźniów</NavLink>
               </div>
             </li>
             <li className="nav-item">
               <div className="nav-link">
-                <NavLink to="/cell">Cele</NavLink>
+                <NavLink to="/cell">Lista Cel</NavLink>
               </div>
             </li>
           </ul>
