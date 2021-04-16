@@ -4,10 +4,12 @@ import React, { Component } from 'react';
 class DeletePrisoner extends Component {
 
     handleDelate = () => {
-        var prisoners = [...this.props.prisoners]
+        const { prisoners, setPrisoners, id } = this.props
+
+        var prisoner = [...prisoners]
 
 
-        fetch(config.SERVER_URL + "api/Prisoner/" + this.props.id, {
+        fetch(config.SERVER_URL + "api/Prisoner/" + id, {
             method: 'DELETE',
             headers: {
                 Accept: "application/json",
@@ -17,9 +19,9 @@ class DeletePrisoner extends Component {
         })
             .then(res => {
                 res.json()
-                var deletedCells = prisoners.findIndex(item => item.id === this.props.id);
-                prisoners.splice(deletedCells, 1);
-                this.props.setPrisoners(prisoners);
+                var deletedCells = prisoner.findIndex(item => item.id === id);
+                prisoner.splice(deletedCells, 1);
+                setPrisoners(prisoner);
 
             })
             .then(res => console.log(res))

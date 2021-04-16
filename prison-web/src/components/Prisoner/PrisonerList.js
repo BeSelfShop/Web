@@ -14,16 +14,14 @@ class PrisonerList extends Component {
     }
     componentDidMount = () => {
         GetAllPrisoners(this.setPrisoners)
-        console.log(this.state.prisoners)
     }
     render() {
-        console.log("preState" + this.state.prisoners)
         return (<div className="cellBox">
             <h1>Lista więźniów:</h1>
             <MappedPrisoner prisoners={this.state.prisoners} setPrisoners={this.setPrisoners} />
             <div>
                 <Link to="/addPrisoner">
-                    <button>Dodaj cele</button>
+                    <button>Dodaj</button>
                 </Link>
             </div>
         </div>);

@@ -1,8 +1,11 @@
 import DeletePrisoner from "../../fetchData/Prisoners/DeletePrisoner";
 import React, { Component } from 'react';
+import { Link } from "react-router-dom";
+
 class MappedPrisoner extends Component {
 
     render() {
+        const { prisoners, setPrisoners } = this.props
         return (<div>
             <table>
                 <tbody>
@@ -10,22 +13,24 @@ class MappedPrisoner extends Component {
                         <td>Imie:</td>
                         <td>Nazwisko:</td>
                         <td>Pesel:</td>
-                        <td>Adres:</td>
-                        <td>Zachowanie:</td>
-                        <td>Przepustka:</td>
-                        <td>Odizolowany:</td>
                         <td>Akcje:</td>
                     </tr>
-                    {this.props.prisoners.map((prisoner) => (
+                    {prisoners.map((prisoner) => (
                         <tr key={prisoner.id}>
                             <td>{prisoner.name}</td>
                             <td>{prisoner.forname}</td>
                             <td>{prisoner.pesel}</td>
-                            <td>{prisoner.address}</td>
-                            <td>{prisoner.behavior}</td>
-                            <td>{prisoner.pass ? "Tak" : "Nie"}</td>
-                            <td>{prisoner.isolated ? "Tak" : "Nie"}</td>
-                            <td>< DeletePrisoner prisoners={this.props.prisoners} setPrisoners={this.props.setPrisoners} id={prisoner.id} /></td>
+                            <td>
+                                < DeletePrisoner
+                                    prisoners={prisoners}
+                                    setPrisoners={setPrisoners}
+                                    id={prisoner.id}
+                                />
+                                <Link to={{
+                                    pathname: '/prisonerInfo/' + prisoner.id,
+                                    state: { id: prisoner.id }
+                                }} key={prisoner.id}>Szczegóły</Link>
+                            </td>
                         </tr>
                     ))}
                 </tbody>

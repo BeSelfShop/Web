@@ -10,6 +10,7 @@ import RegisterUser from "./components/Register/RegisterUser/Register";
 import RegisterAdmin from "./components/Register/RegisterAdmin/RegisterAdmin";
 import Navbar from "./components/Navbar/Navbar";
 import AddPrisoner from "./components/Prisoner/AddPrisoner";
+import ShowPrisoner from "./components/Prisoner/ShowPrisoner";
 import PrisonerList from "./components/Prisoner/PrisonerList";
 import React, { Component } from "react";
 
@@ -65,6 +66,10 @@ class App extends Component {
             <Route
               path="/addPrisoner"
               component={() => <AddPrisoner userKey={this.state.token} />}
+            />
+            <Route
+              path="/prisonerInfo/:id"
+              component={() => <ShowPrisoner userKey={this.state.token} />}
             />
             <Route path="/" exact component={Prison} />
             <Route

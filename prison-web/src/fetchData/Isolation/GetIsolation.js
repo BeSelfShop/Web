@@ -1,7 +1,9 @@
 import config from "../../config.json"
 
-const GetAllPrisoner = (props) => {
-    return (fetch(config.SERVER_URL + "api/Prisoner", {
+const GetIsolation = (props) => {
+    console.log(props)
+
+    return (fetch(config.SERVER_URL + "api/Isolation/" + props.id, {
         method: "GET", // or 'PUT'
 
         headers: {
@@ -12,11 +14,9 @@ const GetAllPrisoner = (props) => {
     })
         .then((response) => response.json())
         .then((data) => {
-            props(data)
+            props.setIsolation(data)
         })
-        .catch((error) => {
-            console.error("Error:", error);
-        }));
+    )
 }
 
-export default GetAllPrisoner;
+export default GetIsolation;
