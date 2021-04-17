@@ -1,7 +1,6 @@
 import config from "../../config.json"
 
 const GetPass = (props) => {
-    console.log(props)
 
     return (fetch(config.SERVER_URL + "api/Pass/" + props.id, {
         method: "GET", // or 'PUT'
@@ -14,7 +13,7 @@ const GetPass = (props) => {
     })
         .then((response) => response.json())
         .then((data) => {
-            props.setPass(data)
+            props.setPass(data);
         })
     )
 }
