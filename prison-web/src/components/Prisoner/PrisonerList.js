@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import GetAllPrisoners from "../../fetchData/Prisoners/GetAllPrisoners";
 import MappedPrisoner from "./MappedPrisoner";
 import { Link } from "react-router-dom";
+import "./Prisoner.css"
 
 class PrisonerList extends Component {
     state = {
@@ -21,7 +22,7 @@ class PrisonerList extends Component {
             <MappedPrisoner prisoners={this.state.prisoners} setPrisoners={this.setPrisoners} />
             <div>
                 <Link to="/addPrisoner">
-                    <button>Dodaj</button>
+                    <button className="add">Dodaj</button>
                 </Link>
             </div>
         </div>);

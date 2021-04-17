@@ -1,0 +1,53 @@
+h1.test, h3.test{
+    color: black;
+}
+.background{
+    background-color:  #191919;
+}
+.section-main{
+    display: flex;
+    flex-direction: row;
+    margin-top: 3%;
+    
+}
+.component{
+    background-color:  #31313181;
+    margin-left: 10%;
+    padding: 3%;
+    width: 35vw;
+    border-radius: 24px; 
+}
+button{
+    border: 0;
+    background: none;
+    display: block;
+    margin: 20px auto;
+    text-align: center;
+    border: 2px solid #d49217;
+    padding: 14px 40px;
+    outline: none;
+    color: white;
+    border-radius: 24px;
+    transition: 0.25s;
+    cursor: pointer;
+}
+button:hover {
+  background: #d492178e;
+}
+button.delete{
+    border: 2px solid #cc1812;
+}
+button.delete:hover {
+  background: #cc18128e;
+}
+button.add{
+    border: 2px solid #2ecc71;
+}
+button.add:hover {
+  background: #2ecc718e;
+}
+.button-section{
+    display: flex;
+    flex-direction: row;
+    margin-top: 3%;
+}

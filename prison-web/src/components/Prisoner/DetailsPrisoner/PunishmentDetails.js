@@ -21,7 +21,7 @@ class PunishmentDetails extends Component {
     handlePunishment = () => {
         let startDate = new Date(this.state.punishment.startDate).toLocaleDateString();
         let endData = new Date(this.state.punishment.endDate).toLocaleDateString();
-        return (<div><h1>Przepustka</h1>
+        return (<div>
             <h3>Data rozpoczęcia: {startDate}</h3>
             <h3>Data zakończenia: {endData}</h3>
             <h3>Powód: </h3>
@@ -31,9 +31,9 @@ class PunishmentDetails extends Component {
     render() {
 
         return (
-            <div className="cellBox">
+            <div>
                 <h1>Kara</h1>
-                {this.state.isFetching ? this.handlePunishment() : <button>Dodaj karę</button>}
+                {this.state.isFetching ? this.handlePunishment() : <button className="add">Dodaj karę</button>}
             </div>);
     }
 }

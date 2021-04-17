@@ -26,18 +26,22 @@ class PassDetail extends Component {
         let startDate = new Date(this.state.pass.startDate).toLocaleDateString();
         let endDate = new Date(this.state.pass.endDate).toLocaleDateString();
 
-        return (<div><h1>Przepustka</h1>
-            <h3>Data rozpoczęcia: {startDate}</h3>
-            <h3>Data zakończenia: {endDate}</h3>
-            <button>Edytuj</button>
-            <button>Skasuj</button></div>)
+        return (
+            <div>
+                <h1>Przepustka</h1>
+                <h3>Data rozpoczęcia: {startDate}</h3>
+                <h3>Data zakończenia: {endDate}</h3>
+                <div className="button-section">
+                    <button>Edytuj</button>
+                    <button className="delete">Skasuj</button>
+                </div>
+            </div>)
+
     }
 
     render() {
-        console.log(this.props)
-        const { startDate, endDate } = this.state.pass
         return (
-            <div>{this.state.isFetching ? this.handlePass() : <button>Dodaj przepustkę</button>}
+            <div>{this.state.isFetching ? this.handlePass() : <button className="add">Dodaj przepustkę</button>}
             </div>
         );
     }

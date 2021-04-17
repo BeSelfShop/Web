@@ -81,7 +81,8 @@ class CellList extends Component {
         )
     }
     render() {
-        return (<div className="cellBox">
+        return (<div >
+            <h1>eff</h1>
             <h1>Lista cel:</h1>
             {this.handleCells()}
             <div>

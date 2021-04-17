@@ -27,7 +27,7 @@ class DeletePrisoner extends Component {
             .then(res => console.log(res))
     }
     render() {
-        return (<button onClick={() => { this.handleDelate() }}>Usuń</button>);
+        return (<button className="delete" onClick={() => { this.handleDelate() }}>Usuń</button>);
     }
 }
 
