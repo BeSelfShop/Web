@@ -24,11 +24,13 @@ class App extends Component {
     this.setState({
       token,
       roles,
+      sesionStatus: true
     });
   };
   clearUser = () => {
     this.setState({
       token: null,
+      roles: ""
     });
   };
   componentDidMount = () => {
@@ -48,30 +50,9 @@ class App extends Component {
         <Router>
           <Navbar user={this.state.token} roles={this.state.roles} />
           <Switch>
+            <Route path="/" exact component={() => <Prison user={this.state.token} />} />
             <Route path="/register" exact component={RegisterUser} />
             <Route path="/register/admin" component={RegisterAdmin} />
-
-            <Route
-              path="/addCell"
-              component={() => <AddCell userKey={this.state.token} />}
-            />
-            <Route
-              path="/prisoners"
-              component={() => <PrisonerList userKey={this.state.token} />}
-            />
-            <Route
-              path="/cell"
-              component={() => <CellList userKey={this.state.token} />}
-            />
-            <Route
-              path="/addPrisoner"
-              component={() => <AddPrisoner userKey={this.state.token} />}
-            />
-            <Route
-              path="/prisonerInfo/:id"
-              component={() => <ShowPrisoner userKey={this.state.token} />}
-            />
-            <Route path="/" exact component={Prison} />
             <Route
               path="/login"
               component={() => (
@@ -82,6 +63,28 @@ class App extends Component {
               path="/logout"
               component={() => <Logout clearUser={this.clearUser} />}
             />
+            {this.state.sesionStatus ? (<div><Route
+              path="/addCell"
+              component={() => <AddCell userKey={this.state.token} />}
+            />
+              <Route
+                path="/prisoners"
+                component={() => <PrisonerList userKey={this.state.token} />}
+              />
+              <Route
+                path="/cell"
+                component={() => <CellList userKey={this.state.token} role={this.state.roles} />}
+              />
+              <Route
+                path="/addPrisoner"
+                component={() => <AddPrisoner userKey={this.state.token} />}
+              />
+              <Route
+                path="/prisonerInfo/:id"
+                component={() => <ShowPrisoner userKey={this.state.token} />}
+              />
+            </div>) : null}
+
           </Switch>
         </Router>
       </div>

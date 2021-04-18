@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import GetIsolation from "../../../fetchData/Isolation/GetIsolation";
+import DeleteIsolation from "../../../fetchData/Isolation/DeleteIsolation";
 
 class IsolationDetails extends Component {
     state = {
@@ -7,7 +8,7 @@ class IsolationDetails extends Component {
         isFetching: false,
     }
     componentDidMount = () => {
-        let isolationHandle = { setPass: this.setIsolation, id: this.props.id }
+        let isolationHandle = { setIsolation: this.setIsolation, id: this.props.id }
         GetIsolation(isolationHandle);
 
     }
@@ -22,10 +23,20 @@ class IsolationDetails extends Component {
         })
 
     }
+    deleteIsolation = () => {
+        this.setState({
+            isolation: [],
+            isFetching: false,
+        })
+
+    }
     handleIsolation = () => {
         let startDate = new Date(this.state.isolation.startDate).toLocaleDateString();
         let endDate = new Date(this.state.isolation.endDate).toLocaleDateString();
-
+        let handleDeleteIsolation = {
+            id: this.props.id,
+            deleteIsolation: this.deleteIsolation
+        }
         return (
             <div>
                 <h1>Izolatka:</h1>
@@ -33,7 +44,7 @@ class IsolationDetails extends Component {
                 <h3>Data zakończenia: {endDate}</h3>
                 <div className="button-section">
                     <button>Edytuj</button>
-                    <button className="delete">Skasuj</button>
+                    <button className="delete" onClick={() => { DeleteIsolation(handleDeleteIsolation) }}>Skasuj</button>
                 </div>
             </div>)
 

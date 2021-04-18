@@ -22,12 +22,11 @@ h3, h1, label{
     font-family: "Permanent Marker", cursive;
 }
 .cellBox {
-  padding: 40px;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  padding-top: 2vh;
   text-align: center;
+  background: #191919;
+  padding-left: 35%;
+
 }
 td, tr{
     font-family: "Permanent Marker", cursive;
@@ -63,4 +62,10 @@ button:hover {
 }
 .deleteButton:hover {
   background: rgba(248, 3, 3, 0.411);
+}
+.cell-main{
+  padding-top: 10vh;
+  text-align: center;
+    background: #191919;
+
 }

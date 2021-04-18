@@ -6,8 +6,10 @@ class Prison extends Component {
 
   render() {
     return (
-      <div className="build">
-        <span>In progress...</span>
+      <div className="start">
+        {this.props.user != null
+          ? (<div><h1>Witaj na stronie więzienia</h1></div>)
+          : (<div><h1>Zaloguj się!</h1></div>)}
       </div>
     );
   }

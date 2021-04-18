@@ -17,7 +17,7 @@ class PrisonerList extends Component {
         GetAllPrisoners(this.setPrisoners)
     }
     render() {
-        return (<div className="cellBox">
+        return (<div className="prisoner-main">
             <h1>Lista więźniów:</h1>
             <MappedPrisoner prisoners={this.state.prisoners} setPrisoners={this.setPrisoners} />
             <div>

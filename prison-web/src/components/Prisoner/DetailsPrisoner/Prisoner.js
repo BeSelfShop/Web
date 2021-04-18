@@ -19,7 +19,7 @@ class Prisoner extends Component {
             </div>
             <div className="section-main">
                 <div className="component"><PassDetails id={id} /></div>
-                <div className="component"><PassDetails id={id} /></div>
+                <div className="component"><IsolationDetails id={id} /></div>
 
             </div>
 

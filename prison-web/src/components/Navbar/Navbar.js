@@ -3,19 +3,20 @@ import { NavLink, Link } from "react-router-dom";
 import "./Navbar.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 const Navbar = (props) => {
+  console.log(props.user)
   return (
     <nav className="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
       <div className="container-fluid">
         <h1 className="navbar-brand">Prison</h1>
 
         <div className="collapse navbar-collapse" id="navbarCollapse">
-          <ul className="navbar-nav me-auto mb-2 mb-md-0">
+
+          {props.user != null ? (<div><ul className="navbar-nav me-auto mb-2 mb-md-0">
             <li className="nav-item">
               <div className="nav-link">
                 <NavLink to="/">Start</NavLink>
               </div>
-            </li>
-            <li className="nav-item">
+            </li> <li className="nav-item">
               <div className="nav-link">
                 <NavLink to="/prisoners">Lista więźniów</NavLink>
               </div>
@@ -26,6 +27,10 @@ const Navbar = (props) => {
               </div>
             </li>
           </ul>
+          </div>
+          ) : null}
+
+
           {props.user ? (
             <div className="auth-section-logout">
               <Link to="/logout">

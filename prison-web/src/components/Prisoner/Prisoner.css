@@ -51,3 +51,35 @@ button.add:hover {
     flex-direction: row;
     margin-top: 3%;
 }
+.prisoner-main{
+    padding-top: 10vh;
+    text-align: center;
+    background: #191919;
+}
+.prisonerBox {
+  padding-top: 2vh;
+  text-align: center;
+  background: #191919;
+  padding-left: 42%;
+
+}
+.details-Button{
+    border: 0;
+    background: none;
+    display: block;
+    margin: 20px auto;
+    text-align: center;
+    border: 2px solid #d49217;
+    padding: 14px 40px;
+    outline: none;
+    color: white;
+    border-radius: 24px;
+    transition: 0.25s;
+    cursor: pointer;
+}
+.details-Button:hover {
+    background: #d492178e;
+    text-decoration: none;
+    color: white;
+
+}

@@ -6,7 +6,7 @@ class MappedPrisoner extends Component {
 
     render() {
         const { prisoners, setPrisoners } = this.props
-        return (<div>
+        return (<div className="prisonerBox">
             <table>
                 <tbody>
                     <tr className="headerTable">
@@ -26,7 +26,7 @@ class MappedPrisoner extends Component {
                                     setPrisoners={setPrisoners}
                                     id={prisoner.id}
                                 />
-                                <Link to={{
+                                <Link className="details-Button" to={{
                                     pathname: '/prisonerInfo/' + prisoner.id,
                                     state: { id: prisoner.id }
                                 }} key={prisoner.id}>Szczegóły</Link>

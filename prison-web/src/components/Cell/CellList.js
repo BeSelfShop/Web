@@ -47,7 +47,7 @@ class CellList extends Component {
 
     handleCells = () => {
         return (
-            <div>
+            <div className="cellBox">
                 <table>
                     <tbody>
                         <tr className="headerTable">
@@ -55,7 +55,7 @@ class CellList extends Component {
                             <td>Ilość miejsc:</td>
                             <td>Ilość zajętych miejsc:</td>
                             <td>Typ celi:</td>
-                            <td>Akcja:</td>
+                            {this.props.role === "Admin" ? <td>Akcja:</td> : null}
                         </tr>
                         {this.state.cells.map((cell) => (
                             <tr key={cell.id}>
@@ -63,16 +63,19 @@ class CellList extends Component {
                                 <td>{cell.bedsCount}</td>
                                 <td>{cell.occupiedBeds}</td>
                                 <td>{cell.cellType.cellName}</td>
-                                <td><button className="deleteButton" id={cell.id} onClick={() => { this.deleteCell(cell.id) }}>Usuń</button>
-                                    <button onClick={() => { this.togglePopup(cell.id) }}>Edytuj</button>
-                                    {this.state.showPopup ?
-                                        <CellEdit
-                                            id={this.state.cellId}
-                                            closePopup={this.togglePopup}
-                                            refreshList={() => GetAllCells(this.setCells)}
-                                        />
-                                        : null
-                                    }</td>
+                                {this.props.role === "Admin"
+                                    ? (
+                                        <td><button className="deleteButton" id={cell.id} onClick={() => { this.deleteCell(cell.id) }}>Usuń</button>
+                                            <button onClick={() => { this.togglePopup(cell.id) }}>Edytuj</button>
+                                            {this.state.showPopup
+                                                ? <CellEdit
+                                                    id={this.state.cellId}
+                                                    closePopup={this.togglePopup}
+                                                    refreshList={() => GetAllCells(this.setCells)}
+                                                />
+                                                : null
+                                            }</td>)
+                                    : null}
                             </tr>
                         ))}
                     </tbody>
@@ -81,15 +84,15 @@ class CellList extends Component {
         )
     }
     render() {
-        return (<div >
-            <h1>eff</h1>
+        return (<div className="cell-main">
             <h1>Lista cel:</h1>
             {this.handleCells()}
-            <div>
+            {this.props.role === "Admin" ? (<div>
                 <Link to="/addCell">
-                    <button>Dodaj cele</button>
+                    <button className="add">Dodaj cele</button>
                 </Link>
-            </div>
+            </div>) : null}
+
         </div >);
     }
 }

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import GetPass from "../../../fetchData/Pass/GetPass";
+import DeletePass from "../../../fetchData/Pass/DeletePass";
 
 class PassDetail extends Component {
     state = {
@@ -22,10 +23,21 @@ class PassDetail extends Component {
         })
 
     }
+    deletePass = () => {
+        this.setState({
+            pass: [],
+            isFetching: false,
+        })
+
+    }
+
     handlePass = () => {
         let startDate = new Date(this.state.pass.startDate).toLocaleDateString();
         let endDate = new Date(this.state.pass.endDate).toLocaleDateString();
-
+        let handlePassDelete = {
+            deletePass: this.deletePass,
+            id: this.props.id
+        }
         return (
             <div>
                 <h1>Przepustka</h1>
@@ -33,7 +45,11 @@ class PassDetail extends Component {
                 <h3>Data zakończenia: {endDate}</h3>
                 <div className="button-section">
                     <button>Edytuj</button>
-                    <button className="delete">Skasuj</button>
+                    <button className="delete" onClick={() => {
+                        DeletePass(handlePassDelete)
+
+                    }}>Usuń</button>
+
                 </div>
             </div>)
 
