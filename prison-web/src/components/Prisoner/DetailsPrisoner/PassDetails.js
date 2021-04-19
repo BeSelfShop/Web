@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import GetPass from "../../../fetchData/Pass/GetPass";
 import DeletePass from "../../../fetchData/Pass/DeletePass";
+import AddPass from "./Pass/AddPass"
 
 class PassDetail extends Component {
     state = {
@@ -57,7 +58,7 @@ class PassDetail extends Component {
 
     render() {
         return (
-            <div>{this.state.isFetching ? this.handlePass() : <button className="add">Dodaj przepustkę</button>}
+            <div>{this.state.isFetching ? this.handlePass() : <AddPass id={this.props.id} setPass={this.setPass} />}
             </div>
         );
     }
