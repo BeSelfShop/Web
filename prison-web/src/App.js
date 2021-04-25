@@ -44,10 +44,12 @@ class App extends Component {
     }
   };
 
+
   render() {
     return (
       <div className="Main">
         <Router>
+        
           <Navbar user={this.state.token} roles={this.state.roles} />
           <Switch>
             <Route path="/" exact component={() => <Prison user={this.state.token} />} />

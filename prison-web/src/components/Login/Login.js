@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import "./Login.css";
 import { Redirect } from "react-router";
 import config from "../../config.json"
+import FacebookLogin from "./FacebookLogin"
 
 
 class Login extends Component {
@@ -67,6 +68,7 @@ class Login extends Component {
             <button className="loginButton" onClick={this.handleButton}>
               Zaloguj
             </button>
+            <FacebookLogin />
           </div>
         )}
       </div>
