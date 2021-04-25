@@ -68,7 +68,8 @@ class Login extends Component {
             <button className="loginButton" onClick={this.handleButton}>
               Zaloguj
             </button>
-            <FacebookLogin />
+
+            {<FacebookLogin setUser={this.props.setUser} />}
           </div>
         )}
       </div>

@@ -14,11 +14,10 @@ const Login = (props) => {
         })
             .then((response) => response.json())
             .then((data) => {
-                console.log("Success:", data);
-
-                console.log(data.Success)
-
-                props.setToken(data)
+                let newdata = data.replace(/['"]+/g, '');
+                localStorage.setItem("roles", "User");
+                localStorage.setItem("token", newdata);
+                props.setUser(newdata, "User")
 
             })
             .catch((error) => {

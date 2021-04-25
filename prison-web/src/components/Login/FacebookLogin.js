@@ -28,19 +28,20 @@ class Facebook extends Component {
     }
     responseFacebook = (response) => {
         this.setAccessToken(response.accessToken)
-        let login = { accessToken: this.state.test, setToken: this.setToken }
+        let login = { accessToken: this.state.test, setUser: this.props.setUser }
         console.log(login)
         LoginFetch(login)
         console.log(this.state.token)
 
     }
     render() {
-        return (<FacebookLogin
-            appId="181950557089746"
-            autoLoad={true}
-            fields="name,email,picture"
-            onClick={this.componentClicked}
-            callback={this.responseFacebook} />);
+        return (
+            <FacebookLogin
+                appId="181950557089746"
+                autoLoad={true}
+                fields="name,email,picture"
+                onClick={this.componentClicked}
+                callback={this.responseFacebook} />);
     }
 }
 
