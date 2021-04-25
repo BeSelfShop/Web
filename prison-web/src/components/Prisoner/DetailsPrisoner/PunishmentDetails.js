@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import GetPunishment from "../../../fetchData/Punishment/GetPunishment";
 import GetReason from "../../../fetchData/Reason/GetReason";
-import AddPunishment from "./Punishment/AddPunishment"
 
 class PunishmentDetails extends Component {
     state = {
@@ -11,13 +10,12 @@ class PunishmentDetails extends Component {
         reason: []
     }
     componentDidMount = () => {
-        this.test();
-        setTimeout(() => { this.test() }, 1000);
-    }
-
-    test = () => {
         let punishmentHandle = { setPunishment: this.setPunishment, id: this.props.id }
         GetPunishment(punishmentHandle);
+    }
+    componentDidUpdate = () =>{
+    }
+    test = () => {
         let reasonHandle = { setReason: this.setReason, id: this.state.punishment.idReason }
         GetReason(reasonHandle);
     }
@@ -45,7 +43,7 @@ class PunishmentDetails extends Component {
         return (<div>
             <h1>Kara</h1>
             <h3>Data rozpoczęcia: {startDate}</h3>
-            <h3>Data zakończenia: {this.state.punishment.lifery ? "Dożywocie" : endData}</h3>
+            <h3>Data zakończenia: {endData}</h3>
             <h3>Powód: {this.state.reason.reasonName}</h3>
             <button>Edytuj</button>
         </div>)
@@ -54,7 +52,7 @@ class PunishmentDetails extends Component {
 
         return (
             <div>
-                {this.state.isFetchingPunishment ? this.handlePunishment() : <AddPunishment id={this.props.id} setPunishment={this.setPunishment} setReason={this.setReason}/>}
+                {this.state.isFetchingPunishment ? this.handlePunishment() : <button className="add">Dodaj karę</button>}
             </div>);
     }
 }

@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import GetIsolation from "../../../fetchData/Isolation/GetIsolation";
 import DeleteIsolation from "../../../fetchData/Isolation/DeleteIsolation";
-import AddIsolation from "./Isolation/AddIsolation"
 
 class IsolationDetails extends Component {
     state = {
@@ -53,7 +52,7 @@ class IsolationDetails extends Component {
 
     render() {
         return (
-            <div>{this.state.isFetching ? this.handleIsolation() : <AddIsolation id={this.props.id} setIsolation={this.setIsolation} />}
+            <div>{this.state.isFetching ? this.handleIsolation() : <button className="add">Dodaj do izolacji</button>}
             </div>
         );
     }

@@ -5,10 +5,7 @@ import { Link } from "react-router-dom";
 class MappedPrisoner extends Component {
 
     render() {
-        const { prisoners, setPrisoners, filtr, idReason } = this.props
-        const prisonersCopy = filtr ? prisoners.filter(prisoner => prisoner.punishments[0]) : prisoners;
-        const reason = filtr ? prisonersCopy.filter(prisoner => prisoner.punishments[0].idReason === idReason) : prisoners;
-        console.log(prisonersCopy)
+        const { prisoners, setPrisoners } = this.props
         return (<div className="prisonerBox">
             <table>
                 <tbody>
@@ -18,8 +15,7 @@ class MappedPrisoner extends Component {
                         <td>Pesel:</td>
                         <td>Akcje:</td>
                     </tr>
-                    {reason.map((prisoner) => (
-
+                    {prisoners.map((prisoner) => (
                         <tr key={prisoner.id}>
                             <td>{prisoner.name}</td>
                             <td>{prisoner.forname}</td>
