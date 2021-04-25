@@ -6,6 +6,7 @@ import Logout from "./components/Logout/Logout";
 import AddCell from "./components/Cell/AddCell";
 import CellList from "./components/Cell/CellList";
 
+import InviteEmployee from "./components/InviteEmloyee/InviteEmloyee";
 import RegisterUser from "./components/Register/RegisterUser/Register";
 import RegisterAdmin from "./components/Register/RegisterAdmin/RegisterAdmin";
 import Navbar from "./components/Navbar/Navbar";
@@ -71,19 +72,26 @@ class App extends Component {
                 path="/prisoners"
                 component={() => <PrisonerList userKey={this.state.token} />}
               />
+              {this.state.roles === "Admin" ? (<div><Route
+                path="/inviteEmployee"
+                component={() => <InviteEmployee userKey={this.state.token} />}
+              />
+                <Route
+                  path="/addPrisoner"
+                  component={() => <AddPrisoner userKey={this.state.token} />}
+                />
+              </div>
+              ) : null}
+
               <Route
                 path="/cell"
                 component={() => <CellList userKey={this.state.token} role={this.state.roles} />}
               />
               <Route
-                path="/addPrisoner"
-                component={() => <AddPrisoner userKey={this.state.token} />}
-              />
-              <Route
                 path="/prisonerInfo/:id"
                 component={() => <ShowPrisoner userKey={this.state.token} />}
-              />
-            </div>) : null}
+              /></div>
+            ) : null}
 
           </Switch>
         </Router>

@@ -1,8 +1,7 @@
 import React, { Component } from "react";
-import config from "../../config.json"
 import "./Cell.css"
 import GetAllCellTypes from "../../fetchData/CellTypes/GetAllCellTypes";
-
+import PostCell from "./../../fetchData/Cells/PostCell"
 
 class Cell extends Component {
   state = {
@@ -11,32 +10,17 @@ class Cell extends Component {
     cellNumber: 1,
     cellTypes: [],
   };
-  handleButton = () => {
-    const data = this.state;
-    fetch(config.SERVER_URL + "api/PCells", {
-      method: "POST", // or 'PUT'
-
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-        Authorization: "Bearer " + localStorage.getItem("token"),
-      },
-      body: JSON.stringify(data),
+  resetState = () => {
+    this.setState({
+      bedsCount: 1,
+      idCellType: 1,
+      cellNumber: 1,
     })
-      .then((response) => response.json())
-      .then((data) => {
-        if (data.statusCode === 200) {
-          alert("Dodano cele");
-          this.setState({
-            bedsCount: 1,
-            idCellType: 1,
-            cellNumber: 1,
-          })
-        }
-      })
-      .catch((error) => {
-        console.error("Error:", error);
-      });
+  }
+  handleButton = () => {
+    let addCell = { data: this.state, resetState: this.resetState }
+    PostCell(addCell)
+
   };
   setCellTypes = (cellTypes) => {
     this.setState({

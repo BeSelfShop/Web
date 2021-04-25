@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import "./Login.css";
 import { Redirect } from "react-router";
-import config from "../../config.json"
+import FetchLogin from "./../../fetchData/Auth/FetchLogin"
 
 
 class Login extends Component {
@@ -16,29 +16,8 @@ class Login extends Component {
     });
   };
   handleButton = () => {
-    const data = this.state;
-    fetch(config.SERVER_URL + "api/Authentication/login", {
-      method: "POST", // or 'PUT'
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data),
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        console.log(data);
-        if (data.token != null) {
-          const user = JSON.stringify(data);
-
-          localStorage.setItem("roles", data.roles);
-          localStorage.setItem("token", data.token);
-          this.props.setUser(user, data.roles);
-        }
-      })
-      .catch((error) => {
-        console.error("Error:", error);
-      });
+    let login = { data: this.state, setUser: this.props.setUser }
+    FetchLogin(login)
   };
 
   render() {

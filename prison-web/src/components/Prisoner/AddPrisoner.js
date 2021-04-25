@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import config from "../../config.json"
 import GetAllCells from "../../fetchData/Cells/GetAllCells";
+import PostPrisoner from "./../../fetchData/Prisoners/PostPrisoner"
 
 class AddPrisoner extends Component {
   state = {
@@ -43,30 +43,25 @@ class AddPrisoner extends Component {
     GetAllCells(this.setCells)
 
   }
+  resetState = () => {
+    this.setState({
+      prisoner: {
+        name: "",
+        forname: "",
+        pesel: "",
+        address: "",
+        pass: false,
+        behavior: 1,
+        isolated: false,
+        idCell: null,
+      }
+    })
+  }
 
   handleButton = () => {
-    const data = this.state.prisoner;
-    console.log(JSON.stringify(data));
-    fetch(config.SERVER_URL + "api/Prisoner", {
-      method: "POST", // or 'PUT'
-
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-        Authorization: "Bearer " + localStorage.getItem("token"),
-      },
-      body: JSON.stringify(data),
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        console.log("Success:", data);
-        if (data.statusCode === 200) {
-          alert("Dodano więźnia");
-        }
-      })
-      .catch((error) => {
-        console.error("Error:", error);
-      });
+    let addPrisoner = { data: this.state.prisoner, resetState: this.resetState }
+    PostPrisoner(addPrisoner)
+    
   };
   handleCells = (e) => {
     this.setState(prevState => {

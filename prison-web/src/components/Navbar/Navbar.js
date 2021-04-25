@@ -26,6 +26,11 @@ const Navbar = (props) => {
                 <NavLink to="/cell">Lista Cel</NavLink>
               </div>
             </li>
+            {props.roles === "Admin" ? (<li className="nav-item">
+              <div className="nav-link">
+                <NavLink to="/inviteEmployee">Zaproś</NavLink>
+              </div>
+            </li>) : null}
           </ul>
           </div>
           ) : null}

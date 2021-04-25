@@ -12,7 +12,7 @@ class MappedPrisoner extends Component {
         return (<div className="prisonerBox">
             <table>
                 <tbody>
-                    <tr className="headerTable">
+                    <tr key="header" className="headerTable">
                         <td>Imie:</td>
                         <td>Nazwisko:</td>
                         <td>Pesel:</td>
