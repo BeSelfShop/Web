@@ -2,7 +2,7 @@ import config from "../../config.json"
 
 
 const GetAllCells = (props) => {
-    console.log("działa v2")
+    console.log(localStorage.getItem("token"))
 
     fetch(config.SERVER_URL + "api/PCells", {
         method: "GET",

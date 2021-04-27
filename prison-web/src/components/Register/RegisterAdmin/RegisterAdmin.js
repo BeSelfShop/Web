@@ -21,7 +21,7 @@ class Register extends Component {
   handleButton = () => {
     const data = this.state;
     console.log(data);
-    fetch(config.SERVER_URL, {
+    fetch(config.SERVER_URL + "api/Authentication/register-admin", {
       method: "POST", // or 'PUT'
       headers: {
         Accept: "application/json",
