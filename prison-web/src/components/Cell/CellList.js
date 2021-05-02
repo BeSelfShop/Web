@@ -3,6 +3,7 @@ import config from "../../config.json"
 import "./Cell.css"
 import CellEdit from './CellEdit';
 import GetAllCells from "../../fetchData/Cells/GetAllCells";
+import DeleteCell from "../../fetchData/Cells/DeleteCell";
 import { Link } from "react-router-dom";
 
 class CellList extends Component {
@@ -26,23 +27,8 @@ class CellList extends Component {
         GetAllCells(this.setCells)
     }
     deleteCell = (id) => {
-        console.log(id)
-        fetch(config.SERVER_URL + "api/PCells/" + id, {
-            method: 'DELETE',
-            headers: {
-                Accept: "application/json",
-                "Content-Type": "application/json",
-                Authorization: "Bearer " + localStorage.getItem("token"),
-            },
-        })
-            .then(res => {
-                res.json()
-                var cells = [...this.state.cells];
-                var deletedCells = cells.findIndex(item => item.id === id);
-                cells.splice(deletedCells, 1);
-                this.setState({ cells })
-            })
-            .then(res => console.log(res))
+        let deleteProps = { state: this.state.cells, setCells: this.setCells, cellId: id }
+        DeleteCell(deleteProps)
     }
 
     handleCells = () => {

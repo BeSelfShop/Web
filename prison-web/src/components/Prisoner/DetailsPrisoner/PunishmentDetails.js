@@ -2,20 +2,23 @@ import React, { Component } from 'react';
 import GetPunishment from "../../../fetchData/Punishment/GetPunishment";
 import GetReason from "../../../fetchData/Reason/GetReason";
 import AddPunishment from "./Punishment/AddPunishment"
+import EditPunishment from "./Punishment/EditPunishemnt"
+
 
 class PunishmentDetails extends Component {
     state = {
         isFetchingReason: false,
         isFetchingPunishment: false,
         punishment: [],
-        reason: []
+        reason: [],
+        showPopup: false,
     }
     componentDidMount = () => {
-        this.test();
-        setTimeout(() => { this.test() }, 1000);
+        this.initiatePunishment();
+        setTimeout(() => { this.initiatePunishment() }, 1000);
     }
 
-    test = () => {
+    initiatePunishment = () => {
         let punishmentHandle = { setPunishment: this.setPunishment, id: this.props.id }
         GetPunishment(punishmentHandle);
         let reasonHandle = { setReason: this.setReason, id: this.state.punishment.idReason }
@@ -35,10 +38,8 @@ class PunishmentDetails extends Component {
             reason,
             isFetchingReason: true,
         })
-        console.log(this.state.reason)
-
-
     }
+
     handlePunishment = () => {
         let startDate = new Date(this.state.punishment.startDate).toLocaleDateString();
         let endData = new Date(this.state.punishment.endDate).toLocaleDateString();
@@ -47,14 +48,27 @@ class PunishmentDetails extends Component {
             <h3>Data rozpoczęcia: {startDate}</h3>
             <h3>Data zakończenia: {this.state.punishment.lifery ? "Dożywocie" : endData}</h3>
             <h3>Powód: {this.state.reason.reasonName}</h3>
-            <button>Edytuj</button>
+            <button onClick={() => { this.togglePopup() }}>Edytuj</button>
+            {this.state.showPopup
+                ? <EditPunishment
+                    punishment={this.state.punishment}
+                    closePopup={this.togglePopup}
+                    refreshList={() => this.initiatePunishment()}
+                />
+                : null
+            }
         </div>)
+    }
+    togglePopup = (id) => {
+        this.setState({
+            showPopup: !this.state.showPopup,
+        });
     }
     render() {
 
         return (
             <div>
-                {this.state.isFetchingPunishment ? this.handlePunishment() : <AddPunishment id={this.props.id} setPunishment={this.setPunishment} setReason={this.setReason}/>}
+                {this.state.isFetchingPunishment ? this.handlePunishment() : <AddPunishment id={this.props.id} setPunishment={this.setPunishment} setReason={this.setReason} />}
             </div>);
     }
 }

@@ -86,6 +86,7 @@ class AddPunishment extends Component {
                 : null}
             {this.mapReason()}
             <button onClick={() => this.handleButton()} className="add">Dodaj karę</button>
+            
         </div>);
     }
 }
