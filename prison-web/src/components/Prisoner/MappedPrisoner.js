@@ -1,4 +1,4 @@
-import DeletePrisoner from "../../fetchData/Prisoners/DeletePrisoner";
+import DeletePrisoner from "../../fetchData/Prisoner/DeletePrisoner";
 import React, { Component } from 'react';
 import { Link } from "react-router-dom";
 

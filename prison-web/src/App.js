@@ -10,7 +10,7 @@ import InviteEmployee from "./components/InviteEmloyee/InviteEmloyee";
 import RegisterUser from "./components/Register/RegisterUser/Register";
 import RegisterAdmin from "./components/Register/RegisterAdmin/RegisterAdmin";
 import Navbar from "./components/Navbar/Navbar";
-import AddPrisoner from "./components/Prisoner/AddPrisoner";
+import AddPrisoner from "./components/Prisoner/DetailsPrisoner/Prisoner/AddPrisoner";
 import ShowPrisoner from "./components/Prisoner/DetailsPrisoner/ShowPrisoner";
 import PrisonerList from "./components/Prisoner/PrisonerList";
 import React, { Component } from "react";

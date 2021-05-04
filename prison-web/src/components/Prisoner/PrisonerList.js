@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import GetAllPrisoners from "../../fetchData/Prisoners/GetAllPrisoners";
+import GetAllPrisoners from "../../fetchData/Prisoner/GetAllPrisoners";
 import GetAllReasons from "../../fetchData/Reason/GetAllReasons";
 import MappedPrisoner from "./MappedPrisoner";
 import { Link } from "react-router-dom";

@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import config from "../../../../config.json"
+import GetReason from "../../../../fetchData/Reason/GetAllReasons";
+import PutPunishment from "../../../../fetchData/Punishment/PutPunishment";
 
-class CellEdit extends Component {
+class EditPunishment extends Component {
     state = {
         punishment: {
             idPrisoner: this.props.id,
@@ -9,15 +10,28 @@ class CellEdit extends Component {
             lifery: false,
             startDate: "",
             endDate: new Date(),
+            reason: [],
+            isFetchingReason: false
         },
     }
     componentDidMount = () => {
         this.setState({
             punishment: this.props.punishment
         })
+        this.loadReason()
+    }
+    loadReason = () => {
+        GetReason(this.setReason)
+    }
+    setReason = (reason) => {
+        this.setState({
+            reason,
+            isFetchingReason: true,
+        })
     }
     handleButton = () => {
-        console.log(this.state.punishment)
+        let punishmentProp = { state: this.state.punishment, id: this.state.punishment.idPrisoner }
+        PutPunishment(punishmentProp)
     };
     handleChange = (e) => {
         if (e.target.name === "lifery") {
@@ -37,18 +51,43 @@ class CellEdit extends Component {
             })
         }
     };
+    handleReason = (e) => {
+
+        this.setState({
+            punishment: {
+                ...this.state.punishment,
+                idReason: e.target.value * 1,
+            },
+        })
+    }
+    mapReason = () => {
+        return (
+            <div>
+                <h3>Powód:</h3>
+                <select onChange={this.handleReason}>
+                    <option value="" defaultValue hidden>{this.props.reason}</option>
+                    {this.state.reason.map((reason) => (
+                        <option key={reason.id} value={reason.id}>
+                            {reason.reasonName}
+                        </option>
+
+                    ))}
+                </select>
+            </div>
+        );
+    }
     render() {
-        let startDate = new Date(this.props.punishment.startDate).toLocaleDateString();
         let endData = new Date(this.props.punishment.endDate).toLocaleDateString();
-        var date = endData.toString();
         return (<div className='popup'>
             <div className='popup_inner'>
                 <div>
+                    <label id="lifery" htmlFor="lifery">Dożywocie: </label>
                     <input id="lifery" name="lifery" onChange={this.handleChange} defaultChecked={this.props.punishment.lifery} type="checkbox" />
-                    {!this.state.punishment.lifery ? (<div><label id="endDate" for="endDate">Data zakończenia kary (obecna {startDate}): </label>
+                    {!this.state.punishment.lifery ? (<div><label id="endDate" htmlFor="endDate">Data zakończenia kary (obecna {endData}): </label>
                         <input name="endDate" onChange={this.handleChange} type="date" /></div>) : null}
-
                 </div>
+                {this.state.isFetchingReason ? this.mapReason() : null}
+
                 <button className="registerButton" onClick={this.handleButton}>
                     Edytuj karę
                 </button>
@@ -58,4 +97,4 @@ class CellEdit extends Component {
     }
 }
 
-export default CellEdit;
+export default EditPunishment;

@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import PrisonerDetails from "./PrisonerDetails"
-import PunishmentDetails from "./PunishmentDetails"
-import PassDetails from "./PassDetails"
-import IsolationDetails from "./IsolationDetails"
+import PrisonerDetails from "./Prisoner/PrisonerDetails"
+import PunishmentDetails from "./Punishment/PunishmentDetails"
+import PassDetails from "./Pass/PassDetails"
+import IsolationDetails from "./Isolation/IsolationDetails"
 
 import "./../Prisoner.css"
 

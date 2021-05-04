@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import config from "../../config.json"
 import "./Cell.css"
 import CellEdit from './CellEdit';
 import GetAllCells from "../../fetchData/Cells/GetAllCells";

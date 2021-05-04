@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import GetPunishment from "../../../fetchData/Punishment/GetPunishment";
-import GetReason from "../../../fetchData/Reason/GetReason";
-import AddPunishment from "./Punishment/AddPunishment"
-import EditPunishment from "./Punishment/EditPunishemnt"
+import GetPunishment from "../../../../fetchData/Punishment/GetPunishment";
+import GetReason from "../../../../fetchData/Reason/GetReason";
+import AddPunishment from "./AddPunishment"
+import EditPunishment from "./EditPunishemnt"
 
 
 class PunishmentDetails extends Component {
@@ -31,7 +31,6 @@ class PunishmentDetails extends Component {
         })
         console.log(this.state.punishment)
 
-
     }
     setReason = (reason) => {
         this.setState({
@@ -53,7 +52,7 @@ class PunishmentDetails extends Component {
                 ? <EditPunishment
                     punishment={this.state.punishment}
                     closePopup={this.togglePopup}
-                    refreshList={() => this.initiatePunishment()}
+                    reason={this.state.reason.reasonName}
                 />
                 : null
             }
@@ -63,6 +62,8 @@ class PunishmentDetails extends Component {
         this.setState({
             showPopup: !this.state.showPopup,
         });
+        this.initiatePunishment()
+        setTimeout(() => { this.initiatePunishment() }, 1000);
     }
     render() {
 

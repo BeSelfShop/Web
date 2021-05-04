@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import GetAllCells from "../../fetchData/Cells/GetAllCells";
-import PostPrisoner from "./../../fetchData/Prisoners/PostPrisoner"
+import GetAllCells from "../../../../fetchData/Cells/GetAllCells";
+import PostPrisoner from "../../../../fetchData/Prisoner/PostPrisoner"
 
 class AddPrisoner extends Component {
   state = {
@@ -61,7 +61,7 @@ class AddPrisoner extends Component {
   handleButton = () => {
     let addPrisoner = { data: this.state.prisoner, resetState: this.resetState }
     PostPrisoner(addPrisoner)
-    
+
   };
   handleCells = (e) => {
     this.setState(prevState => {

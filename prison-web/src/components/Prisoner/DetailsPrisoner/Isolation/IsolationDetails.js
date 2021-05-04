@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import GetIsolation from "../../../fetchData/Isolation/GetIsolation";
-import DeleteIsolation from "../../../fetchData/Isolation/DeleteIsolation";
-import AddIsolation from "./Isolation/AddIsolation"
+import GetIsolation from "../../../../fetchData/Isolation/GetIsolation";
+import DeleteIsolation from "../../../../fetchData/Isolation/DeleteIsolation";
+import AddIsolation from "./AddIsolation"
+import EditIsolation from './EditIsolation';
 
 class IsolationDetails extends Component {
     state = {
@@ -9,9 +10,17 @@ class IsolationDetails extends Component {
         isFetching: false,
     }
     componentDidMount = () => {
+        this.initiateIsolation()
+    }
+    initiateIsolation = () => {
         let isolationHandle = { setIsolation: this.setIsolation, id: this.props.id }
         GetIsolation(isolationHandle);
-
+    }
+    togglePopup = () => {
+        this.setState({
+            showPopup: !this.state.showPopup,
+        });
+        this.initiateIsolation()
     }
     componentWillUnmount() {
         clearInterval(this.timer);
@@ -44,7 +53,14 @@ class IsolationDetails extends Component {
                 <h3>Data rozpoczęcia: {startDate}</h3>
                 <h3>Data zakończenia: {endDate}</h3>
                 <div className="button-section">
-                    <button>Edytuj</button>
+                    <button onClick={() => { this.togglePopup() }}>Edytuj</button>
+                    {this.state.showPopup
+                        ? <EditIsolation
+                            isolation={this.state.isolation}
+                            closePopup={this.togglePopup}
+                        />
+                        : null
+                    }
                     <button className="delete" onClick={() => { DeleteIsolation(handleDeleteIsolation) }}>Skasuj</button>
                 </div>
             </div>)
