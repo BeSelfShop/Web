@@ -2,8 +2,6 @@ import config from "../../config.json"
 
 
 const GetAllCells = (props) => {
-    console.log("działa v2")
-
     fetch(config.SERVER_URL + "api/PCells", {
         method: "GET",
 

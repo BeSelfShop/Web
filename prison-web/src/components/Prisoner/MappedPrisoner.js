@@ -8,7 +8,6 @@ class MappedPrisoner extends Component {
         const { prisoners, setPrisoners, filtr, idReason } = this.props
         const prisonersCopy = filtr ? prisoners.filter(prisoner => prisoner.punishments[0]) : prisoners;
         const reason = filtr ? prisonersCopy.filter(prisoner => prisoner.punishments[0].idReason === idReason) : prisoners;
-        console.log(prisonersCopy)
         return (<div className="prisonerBox">
             <table>
                 <tbody>
@@ -24,16 +23,17 @@ class MappedPrisoner extends Component {
                             <td>{prisoner.name}</td>
                             <td>{prisoner.forname}</td>
                             <td>{prisoner.pesel}</td>
-                            <td>
+                            <td key={prisoner.id}>
                                 < DeletePrisoner
                                     prisoners={prisoners}
                                     setPrisoners={setPrisoners}
                                     id={prisoner.id}
+
                                 />
                                 <Link className="details-Button" to={{
                                     pathname: '/prisonerInfo/' + prisoner.id,
                                     state: { id: prisoner.id }
-                                }} key={prisoner.id}>Szczegóły</Link>
+                                }}>Szczegóły</Link>
                             </td>
                         </tr>
                     ))}

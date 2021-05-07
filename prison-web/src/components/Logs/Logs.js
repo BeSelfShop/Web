@@ -17,6 +17,7 @@ class Logs extends Component {
         })
     }
     handleNextButton = () => {
+
         this.setState(prevState => {
             return {
                 firstLog: prevState.firstLog + 20,
@@ -55,7 +56,7 @@ class Logs extends Component {
             </div>
             <div className="log-buttons">
                 {firstLog === 0 ? null : <button className="add" onClick={this.handlePrevButton}>Poprzednie</button>}
-                <button className="add" onClick={this.handleNextButton}>Następne</button>
+                {logs.length > lastLog ? <button className="add" onClick={this.handleNextButton}>Następne</button> : null}
             </div>
         </div>
         );
