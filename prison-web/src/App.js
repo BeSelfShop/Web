@@ -5,7 +5,7 @@ import Prison from "./components/Prison/Prison";
 import Logout from "./components/Logout/Logout";
 import AddCell from "./components/Cell/AddCell";
 import CellList from "./components/Cell/CellList";
-
+import Logs from "./components/Logs/Logs";
 import InviteEmployee from "./components/InviteEmloyee/InviteEmloyee";
 import RegisterUser from "./components/Register/RegisterUser/Register";
 import RegisterAdmin from "./components/Register/RegisterAdmin/RegisterAdmin";
@@ -79,6 +79,10 @@ class App extends Component {
                 <Route
                   path="/addPrisoner"
                   component={() => <AddPrisoner userKey={this.state.token} />}
+                />
+                <Route
+                  path="/logs"
+                  component={() => <Logs userKey={this.state.token} />}
                 />
               </div>
               ) : null}

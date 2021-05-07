@@ -2,8 +2,8 @@ import React from "react";
 import { NavLink, Link } from "react-router-dom";
 import "./Navbar.css";
 import "bootstrap/dist/css/bootstrap.min.css";
+
 const Navbar = (props) => {
-  console.log(props.user)
   return (
     <nav className="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
       <div className="container-fluid">
@@ -29,6 +29,11 @@ const Navbar = (props) => {
             {props.roles === "Admin" ? (<li className="nav-item">
               <div className="nav-link">
                 <NavLink to="/inviteEmployee">Zaproś</NavLink>
+              </div>
+            </li>) : null}
+            {props.roles === "Admin" ? (<li className="nav-item">
+              <div className="nav-link">
+                <NavLink to="/logs">Logi</NavLink>
               </div>
             </li>) : null}
           </ul>

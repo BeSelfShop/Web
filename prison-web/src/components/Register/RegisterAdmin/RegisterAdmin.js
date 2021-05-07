@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import "./RegisterAdmin.css";
-import config from "../../../config.json"
+import FetchRegisterAdmin from "./../../../fetchData/Auth/FetchRegister"
 
 class Register extends Component {
   state = {
@@ -19,26 +19,7 @@ class Register extends Component {
   };
 
   handleButton = () => {
-    const data = this.state;
-    console.log(data);
-    fetch(config.SERVER_URL, {
-      method: "POST", // or 'PUT'
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data),
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        console.log("Success:", data);
-        if (data.status !== 400) {
-          alert("Zarejestrowano");
-        }
-      })
-      .catch((error) => {
-        console.error("Error:", error);
-      });
+    FetchRegisterAdmin(this.state)
   };
 
   render() {

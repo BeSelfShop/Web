@@ -15,13 +15,11 @@ class PrisonerList extends Component {
     setPrisoners = (prisoners) => {
         this.setState({
             prisoners
-
         })
     }
     setReason = (reasons) => {
         this.setState({
             reasons
-
         })
     }
     componentDidMount = () => {
@@ -33,7 +31,6 @@ class PrisonerList extends Component {
             this.setState({
                 filtr: false
             })
-            console.log(this.state.filtr)
         }
         else {
             this.setState({

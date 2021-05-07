@@ -1,0 +1,4 @@
+.log-buttons{
+    display: flex;
+    flex-direction: row;
+}
