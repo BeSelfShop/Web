@@ -18,6 +18,7 @@ class InviteEmployee extends Component {
             <div className="registerBox">
                 <h1 className="registerH1">Zaproś pracownika</h1>
                 <input
+                    className="invite-employee"
                     type="email"
                     name="email"
                     placeholder="Email"

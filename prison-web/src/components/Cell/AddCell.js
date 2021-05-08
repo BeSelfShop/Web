@@ -60,6 +60,7 @@ class Cell extends Component {
         <h1 className="registerH1">Tworzenie cel</h1>
         <label htmlFor="bedsCount">Ilość łóżek (1-10):</label>
         <input
+          className="beds-count"
           id="bedsCount"
           type="number"
           name="bedsCount"
@@ -70,6 +71,7 @@ class Cell extends Component {
         />
         <label htmlFor="cellNumber">Numer celi:</label>
         <input
+          className="cell-number"
           id="cellNumber"
           type="text"
           name="cellNumber"

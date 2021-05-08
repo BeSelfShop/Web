@@ -29,6 +29,8 @@ class Login extends Component {
           <div className="loginBox">
             <h1 className="loginH1">Logowanie</h1>
             <input
+              autoFocus
+              className="log"
               type="text"
               name="userName"
               placeholder="login"
@@ -36,6 +38,7 @@ class Login extends Component {
               onChange={this.handleChange}
             />
             <input
+              className="password"
               type="password"
               placeholder="hasło"
               name="password"
