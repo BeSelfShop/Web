@@ -81,5 +81,25 @@ button.add:hover {
     background: #d492178e;
     text-decoration: none;
     color: white;
-
+}
+.popup_inner {
+  position: absolute;
+  left: 10%;
+  right: 10%;
+  top: 10%;
+  bottom: 10%;
+  padding-top: 5%;
+  margin: auto;
+  text-align: center;
+  background: #191919;
+  border-radius: 24px;
+}
+.edit-label{
+    padding: 1%;
+}
+input, select{
+    background-color: #3b3b3b;
+}
+.radio-category{
+    padding: 1%;
 }

@@ -43,7 +43,7 @@ class EditPrisoner extends Component {
         console.log(this.props)
         return (<div className='popup'>
             <div className='popup_inner'>
-                <div>
+                <div className="edit-label">
                     <label id="name" htmlFor="name">Imię: </label>
                     <input
                         type="text"
@@ -53,7 +53,7 @@ class EditPrisoner extends Component {
                         onChange={this.handleChange}
                     />
                 </div>
-                <div>
+                <div className="edit-label">
                     <label id="forname" htmlFor="forname">Nazwisko: </label>
                     <input
                         type="text"
@@ -63,7 +63,7 @@ class EditPrisoner extends Component {
                         onChange={this.handleChange}
                     />
                 </div>
-                <div>
+                <div className="edit-label">
                     <label id="pesel" htmlFor="pesel">Pesel: </label>
                     <input
                         type="text"
@@ -73,7 +73,7 @@ class EditPrisoner extends Component {
                         onChange={this.handleChange}
                     />
                 </div>
-                <div>
+                <div className="edit-label">
                     <label id="address" address="endDate">Adres: </label>
                     <input
                         type="text"
@@ -83,26 +83,27 @@ class EditPrisoner extends Component {
                         onChange={this.handleChange}
                     />
                 </div>
-                <h3>Zachowanie:</h3>
-                <select name="behavior" onChange={this.handleChange}>
-                    <option value="" defaultValue hidden>{behavior}</option>
-                    <option key="1" value="1">
-                        1
+                <div className="edit-label">
+                    <h3>Zachowanie:</h3>
+                    <select name="behavior" onChange={this.handleChange}>
+                        <option value="" defaultValue hidden>{behavior}</option>
+                        <option key="1" value="1">
+                            1
                     </option>
-                    <option key="2" value="2">
-                        2
+                        <option key="2" value="2">
+                            2
                     </option>
-                    <option key="3" value="3">
-                        3
+                        <option key="3" value="3">
+                            3
                     </option>
-                    <option key="4" value="4">
-                        4
+                        <option key="4" value="4">
+                            4
                     </option>
-                    <option key="5" value="5">
-                        5
+                        <option key="5" value="5">
+                            5
                     </option>
-                </select>
-
+                    </select>
+                </div>
                 <button className="registerButton" onClick={this.handleButton}>
                     Edytuj więźnia
                 </button>

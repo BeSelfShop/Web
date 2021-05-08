@@ -41,9 +41,13 @@ class PrisonerList extends Component {
     }
     render() {
         return (<div className="prisoner-main">
-            <label><input type="radio" value="0" name="gender" onClick={this.setFiltr} /> Wszystkie</label>
+            <label className="radio-category">
+                <input type="radio" value="0" name="gender" onClick={this.setFiltr} /> Wszystkie
+            </label>
             {this.state.reasons.map(reason => (
-                <label><input type="radio" value={reason.id} name="gender" onClick={this.setFiltr} /> {reason.reasonName} </label>
+                <label className="radio-category">
+                    <input type="radio" value={reason.id} name="gender" onClick={this.setFiltr} /> {reason.reasonName}
+                </label>
             ))}
             <h1>Lista więźniów:</h1>
             <MappedPrisoner prisoners={this.state.prisoners} setPrisoners={this.setPrisoners} filtr={this.state.filtr} idReason={this.state.idReason} />

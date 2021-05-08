@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
-import config from "../../config.json"
 import "./Cell.css"
+import PutCell from "../../fetchData/Cells/PutCell"
+import GetCell from "../../fetchData/Cells/GetCell"
+
 
 class CellEdit extends Component {
     state = {
@@ -9,53 +11,20 @@ class CellEdit extends Component {
         cellNumber: 1,
     }
     componentDidMount = () => {
-        fetch(config.SERVER_URL + "api/PCells/" + this.props.id, {
-            method: "GET",
-
-            headers: {
-                Accept: "application/json",
-                "Content-Type": "application/json",
-                Authorization: "Bearer " + localStorage.getItem("token"),
-            },
+        let getCell = { setCell: this.setCell, id: this.props.id }
+        GetCell(getCell)
+    }
+    setCell = (data) => {
+        this.setState({
+            bedsCount: data.bedsCount,
+            idCellType: data.idCellType,
+            cellNumber: data.cellNumber,
         })
-            .then((response) => response.json())
-            .then((data) => {
-
-                this.setState({
-                    bedsCount: data.bedsCount,
-                    idCellType: data.idCellType,
-                    cellNumber: data.cellNumber,
-                })
-            })
-            .catch((error) => {
-                console.error("Error:", error);
-            });
     }
     handleButton = () => {
-        const data = this.state;
-        console.log(data)
-        fetch(config.SERVER_URL + "api/PCells/" + this.props.id, {
-            method: "PUT",
-
-            headers: {
-                Accept: "application/json",
-                "Content-Type": "application/json",
-                Authorization: "Bearer " + localStorage.getItem("token"),
-            },
-            body: JSON.stringify(data),
-        })
-            .then((response) => response.json())
-            .then((data) => {
-                console.log("Success:", data);
-                if (data.statusCode === 200) {
-                    alert("Edytowano cele");
-                    this.props.refreshList()
-                    this.props.closePopup();
-                }
-            })
-            .catch((error) => {
-                console.error("Error:", error);
-            });
+        const { id, refreshList, closePopup } = this.props
+        let cell = { id: id, refreshList: refreshList, closePopup: closePopup, data: this.state }
+        PutCell(cell)
     };
     handleChange = (e) => {
         this.setState({
