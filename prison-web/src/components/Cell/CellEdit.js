@@ -37,6 +37,7 @@ class CellEdit extends Component {
                 <div>
                     <label htmlFor="bedsCount">Ilość łóżek (1-10):</label>
                     <input
+                        className="beds"
                         id="bedsCount"
                         type="number"
                         name="bedsCount"
@@ -48,6 +49,7 @@ class CellEdit extends Component {
                 </div>
                 <label htmlFor="cellNumber">Numer celi:</label>
                 <input
+                    className="cell-number"
                     id="cellNumber"
                     type="text"
                     name="cellNumber"

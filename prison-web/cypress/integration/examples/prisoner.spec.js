@@ -1,11 +1,11 @@
 /// <reference types="cypress" />
 
-describe('Cell', () => {
+describe('prisoner', () => {
     beforeEach(() => {
         cy.visit('/login')
     })
 
-    it('AddCell', () => {
+    it('get', () => {
         cy.get('.log')
             .type('Admin')
             .should('have.value', 'Admin')
@@ -13,35 +13,18 @@ describe('Cell', () => {
             .type('Admin1!')
             .should('have.value', 'Admin1!')
         cy.contains('Zaloguj').click()
-        cy.contains('Lista Cel').click()
-        cy.contains('Dodaj cele').click()
-        cy.get('.cell-number')
-            .type('129')
-            .should('have.value', '1129')
-        cy.get('.beds-count')
-            .should('have.value', '1')
-        cy.contains('Utwórz cele').click()
-    })
-
-    it('EditCell', () => {
-        cy.get('.log')
-            .type('Admin')
-            .should('have.value', 'Admin')
-        cy.get('.password')
-            .type('Admin1!')
-            .should('have.value', 'Admin1!')
-        cy.contains('Zaloguj').click()
-        cy.contains('Lista Cel').click()
-        cy.contains('1129')
+        cy.contains('Lista więźniów').click()
+        cy.contains('Testowy')
             .parent('tr')
             .within(() => {
                 // all searches are automatically rooted to the found tr element
-                cy.get('td').eq(4).contains('Edytuj').click()
+                cy.get('td').eq(1).contains('User')
+                cy.get('td').eq(2).contains('12345')
             })
 
     })
 
-    it('DeleteCell', () => {
+    it('details', () => {
         cy.get('.log')
             .type('Admin')
             .should('have.value', 'Admin')
@@ -49,16 +32,32 @@ describe('Cell', () => {
             .type('Admin1!')
             .should('have.value', 'Admin1!')
         cy.contains('Zaloguj').click()
-        cy.contains('Lista Cel').click()
-        cy.contains('1129')
+        cy.contains('Lista więźniów').click()
+        cy.contains('Testowy')
             .parent('tr')
             .within(() => {
                 // all searches are automatically rooted to the found tr element
-                cy.get('td').eq(1).contains('1')
-                cy.get('td').eq(2).contains('0')
-                cy.get('td').eq(3).contains('Cela')
-                cy.get('td').eq(4).contains('Usuń').click()
+                cy.get('td').eq(3).contains('Szczegóły').click()
             })
+
+    })
+
+    it('edit', () => {
+        cy.get('.log')
+            .type('Admin')
+            .should('have.value', 'Admin')
+        cy.get('.password')
+            .type('Admin1!')
+            .should('have.value', 'Admin1!')
+        cy.contains('Zaloguj').click()
+        cy.contains('Lista więźniów').click()
+        cy.contains('Testowy')
+            .parent('tr')
+            .within(() => {
+                // all searches are automatically rooted to the found tr element
+                cy.get('td').eq(3).contains('Szczegóły').click()
+            })
+        cy.contains('Edytuj').click()
 
     })
 })

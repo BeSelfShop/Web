@@ -43,7 +43,7 @@ class CellList extends Component {
                             {this.props.role === "Admin" ? <td>Akcja:</td> : null}
                         </tr>
                         {this.state.cells.map((cell) => (
-                            <tr key={cell.id}>
+                            <tr id={cell.id} key={cell.id}>
                                 <td>{cell.cellNumber}</td>
                                 <td>{cell.bedsCount}</td>
                                 <td>{cell.occupiedBeds}</td>
